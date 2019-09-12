@@ -1,0 +1,4 @@
+﻿QWidget#processingWidget{
+	border: none;
+	background-color: green;
+}
