@@ -9,5 +9,17 @@
         <file>images/hamburg.png</file>
         <file>qss/CandidateWidget.qss</file>
         <file>qss/ProcessingWidget.qss</file>
+        <file>images/down_arrow.png</file>
+        <file>images/list_add.png</file>
+        <file>images/list_del.png</file>
+        <file>images/up_arrow.png</file>
+        <file>images/down_arrow_gray.png</file>
+        <file>images/list_add_gray.png</file>
+        <file>images/list_del_gray.png</file>
+        <file>images/up_arrow_gray.png</file>
+        <file>images/settings_20px.png</file>
+        <file>images/close_black.png</file>
+        <file>images/close_red.png</file>
+        <file>images/close_white.png</file>
     </qresource>
 </RCC>

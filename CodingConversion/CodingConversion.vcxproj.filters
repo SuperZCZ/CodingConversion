@@ -70,6 +70,12 @@
     <QtMoc Include="CodingConversion\include\mainWindow\ProcessingWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\CandidateToolWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\CandidateFilterWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodingConversion\src\charDetect\CharDetect.cpp">
@@ -91,6 +97,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CodingConversion\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\candidate\CandidateToolWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\candidate\CandidateFilterWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

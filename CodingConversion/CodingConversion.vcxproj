@@ -29,6 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
+    <QtMoc Include="CodingConversion\include\candidate\CandidateToolWidget.h" />
+    <QtMoc Include="CodingConversion\include\candidate\CandidateFilterWidget.h" />
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h" />
     <ClInclude Include="CodingConversion\include\CharGlobal.h" />
     <QtMoc Include="CodingConversion\include\mainWindow\ProcessingWidget.h" />
@@ -38,6 +40,8 @@
     <QtMoc Include="CodingConversion\include\custom\CustomTitleBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CodingConversion\src\candidate\CandidateFilterWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\candidate\CandidateToolWidget.cpp" />
     <ClCompile Include="CodingConversion\src\charDetect\CharDetect.cpp" />
     <ClCompile Include="CodingConversion\src\custom\CustomTitleBar.cpp" />
     <ClCompile Include="CodingConversion\src\custom\CustomWidget.cpp" />

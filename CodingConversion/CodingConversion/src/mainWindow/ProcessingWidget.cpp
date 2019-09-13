@@ -9,6 +9,8 @@
  * Describe: 处理窗体
  */
 
+#include <QDebug>
+
 #include "mainWindow/ProcessingWidget.h"
 
 ProcessingWidget::ProcessingWidget(QWidget* parent /*= NULL*/) :PainterWidget(parent)

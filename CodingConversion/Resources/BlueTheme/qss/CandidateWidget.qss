@@ -2,6 +2,204 @@
 	border-left: 0px;
 	border-top: 0px;
 	border-bottom: 0px;
-	border-right: 1px solid red;
-	background-color: yellow;
+	border-right: 1px solid gray;
+	background-color: white;
 }
+
+QWidget#toolWidget{
+	min-height: 30px;
+	max-height: 30px;
+	/*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #D7E7FC, stop: 1.0 #A2B7ED);*/
+	background-color: transparent;
+	border-bottom: 1px solid gray;
+}
+
+QWidget#filterWidget{
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 1px solid gray;
+	border-right: 0px;
+	min-height: 60px;
+	max-height: 60px;
+	background-color: transparent;
+}
+
+QWidget#stateWidget{
+	min-height: 25px;
+	max-height: 25px;
+	background-color: #F0F0F0;
+}
+
+QLabel#toolInfoLabel{
+	margin-left: 2px;
+	font-size: 15px;
+	font-weight: bold;
+	color: gray;
+}
+
+QPushButton#addButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/list_add.png");
+}
+
+QPushButton#addButt:disabled{
+	image: url(":/images/list_add_gray.png");
+}
+
+QPushButton#addButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+
+
+QPushButton#delButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/list_del.png");
+}
+
+QPushButton#delButt:disabled{
+	image: url(":/images/list_del_gray.png");
+}
+
+QPushButton#delButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+
+QPushButton#upButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/up_arrow.png");
+}
+
+QPushButton#upButt:disabled{
+	image: url(":/images/up_arrow_gray.png");
+}
+
+QPushButton#upButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+QPushButton#downButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/down_arrow.png");
+}
+
+QPushButton#downButt:disabled{
+	image: url(":/images/down_arrow_gray.png");
+}
+
+QPushButton#downButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+QPushButton#filterSetButt{
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 75px;
+	max-width: 75px;
+	padding-left: 23px;
+	outline: none;
+	border: none;
+	font-size: 13px;
+	color: #1E88E5;
+	font-weight: bold;
+	background-color: transparent;
+	background-image: url(":/images/settings_20px.png");
+	background-position: left;
+	background-repeat: no-repeat;
+}
+
+QPushButton#filterSetButt:hover{
+	margin-left: 2px;
+	background-color: #CCE8FF;
+	font-size: 14px;
+}
+
+
+QTabBar#filterTabBar{
+	max-height: 23px;
+	min-height: 23px;
+	border: none;
+	background-color: transparent;
+} 
+
+QTabBar#filterTabBar::tab {
+	max-height: 23px;
+	min-height: 23px;
+	min-width: 55px;
+	max-width: 90px;
+	margin-right: 3px;
+	padding-left: 5px;
+    background-color: #F0AA2C;
+    border: 0px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+QTabBar#filterTabBar::tear {
+	image: none; /*当tab多时 在整个bar最左侧的标识*/
+}
+
+QTabBar#filterTabBar::scroller { /* 左+右按钮(QToolButton)所在的区域 */
+	width: 40px;
+}
+
+QTabBar#filterTabBar QToolButton { /* the scroll buttons are tool buttons */
+	
+	border: none;
+}
+
+QTabBar#filterTabBar QToolButton::right-arrow { /* the arrow mark in the tool buttons */
+	image: url(":/images/settings_20px.png");
+}
+
+QTabBar#filterTabBar QToolButton::left-arrow {
+	image: url(":/images/settings_20px.png");
+}
+
+QTabBar#filterTabBar::close-button {
+	max-height: 15px;
+	min-height: 15px;
+	min-width: 15px;
+	max-width: 15px;
+    image: url(":/images/close_white.png") 5;
+}
+
+QTabBar#filterTabBar::close-button:hover {
+    image: url(":/images/close_red.png");
+}
+
+QTableView#candidateTableView{
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 1px solid gray;
+	border-right: 0px;
+}
+
+
+

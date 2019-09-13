@@ -13,9 +13,13 @@
 #define _CANDIDATE_WIDGET_H_
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QTableView>
 
-#include "custom/CustomWidget.h"
 #include "CharGlobal.h"
+#include "custom/CustomWidget.h"
+#include "candidate/CandidateToolWidget.h"
+#include "candidate/CandidateFilterWidget.h"
 
 class CandidateWidget :public PainterWidget
 {
@@ -25,6 +29,12 @@ public:
 	virtual ~CandidateWidget() {}
 protected:
 private:
+	QVBoxLayout* vAllLay;
+
+	CandidateToolWidget* toolWidget;
+	QTableView* candidateTableView;
+	CandidateFilterWidget* filterWidget;
+	PainterWidget* stateWidget;
 };
 
 #endif
