@@ -1,4 +1,6 @@
-/.vs
 /x64
-/CodingConversion/CodingConversion.vcxproj.user
-/CodingConversion/x64
+/.vs
+/CodingConversion.vcxproj
+/CodingConversion.vcxproj.filters
+/CodingConversion.vcxproj.user
+/CodingConversion.sln
