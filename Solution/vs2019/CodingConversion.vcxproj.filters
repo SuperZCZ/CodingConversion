@@ -31,6 +31,7 @@
     <None Include="Resources\BlueTheme\qss\ProcessingWidget.qss" />
     <None Include="LICENSE" />
     <None Include="README.md" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h">
