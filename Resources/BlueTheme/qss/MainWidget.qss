@@ -1,0 +1,235 @@
+﻿QWidget#MainWindow {
+	border: 1px solid gray;
+	background-color: white;
+}
+
+QWidget#titleSettingWidget {
+	max-width: 30px;
+	min-width: 30px;
+	min-height: 30px;
+	max-height: 30px;
+}
+
+QWidget#titleBarWidget {
+	max-width: 90px;
+	min-width: 90px;
+	min-height: 30px;
+	max-height: 30px;
+}
+
+QWidget#titleLabelWidget{
+	min-height: 30px;
+	max-height: 30px;
+}
+
+
+
+QWidget#topTitleWidget {
+	margin-right: 2px;   /*防止左侧遮挡父窗体的border*/
+	min-height: 30px;
+	max-height: 30px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid gray;
+	background-color: #CCD5F0;
+}
+
+QWidget#topTitleWidget:active {
+	background-color: #A2B7ED;
+}
+
+QWidget#CustomTitleBar {
+	min-height: 30px;
+	max-height: 30px;
+}
+
+QLabel#titleLabel {
+	margin-left: 5px;
+	color: gray;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+QLabel#titleLabel:active {
+	color: black;
+}
+
+QLabel#iconLabel {
+	margin-left: 2px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/logo.png");
+}
+
+QPushButton#miniSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 30px;
+	max-height: 30px;
+	min-width: 30px;
+	max-width: 30px;
+	image: url(":/images/mini.png");
+}
+
+QPushButton#miniSizeButt:hover{
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#maxNormalSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 30px;
+	max-height: 30px;
+	min-width: 30px;
+	max-width: 30px;
+	image: url(":/images/max.png");
+}
+
+QPushButton#maxNormalSizeButt:hover{
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#maxNormalSizeButt:checked{
+	image: url(":/images/normal.png");
+}
+
+QPushButton#closeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 30px;
+	max-height: 30px;
+	min-width: 30px;
+	max-width: 30px;
+	image: url(":/images/x.png");
+}
+
+QPushButton#closeButt:hover{
+	background-color: rgb(231,68,80);
+}
+
+
+
+
+QPushButton#settingButt{
+	min-height: 30px;
+	max-height: 30px;
+	min-width: 30px;
+	max-width: 30px;
+	border: none;
+	outline: none;
+	image: url(":/images/hamburg.png");
+}
+
+QPushButton#settingButt:hover{
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#settingButt:open{
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#settingButt::menu-indicator{
+	image: none;
+}
+
+QSplitter#mainWinodwSplitter::handle:horizontal {
+    width: 0px;
+}
+
+QSplitter#mainWinodwSplitter::handle:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal{
+    height:10px;
+    border:1px solid rgba(0,0,0,50);
+    margin:0px,0px,0px,0px;
+    padding-left:10px;
+    padding-right:10px;
+}
+QScrollBar::handle:horizontal{
+    height:10px;
+    background:rgba(0,0,0,25%);
+    min-width:20;
+}
+QScrollBar::handle:horizontal:hover{
+    background:rgba(0,0,0,50%);
+    border:0px rgba(0,0,0,25%);
+}
+QScrollBar::sub-line:horizontal{
+    width:10px;
+    border-image:url(:/Res/scroll_left.png);
+    subcontrol-position:left;
+}
+QScrollBar::sub-line:horizontal:hover{
+    width:10px;
+    background:rgba(0,0,0,25%);
+    subcontrol-position:left;
+}
+QScrollBar::add-line:horizontal{
+    width:10px;
+    border-image:url(:/Res/scroll_right.png);
+    subcontrol-position:right;
+}
+QScrollBar::add-line:horizontal:hover{
+    width:10px;
+    background:rgba(0,0,0,25%);
+    subcontrol-position:right;
+}
+QScrollBar::add-page:horizontal{
+    background:rgb(255,255,255);  /*左侧空白*/
+}
+QScrollBar::sub-page:horizontal{
+    background:rgb(255,255,255);  /*右侧空白*/
+}
+
+
+
+QScrollBar:vertical{
+    width:10px;
+    border:1px solid rgba(0,0,0,50);
+    margin:0px,0px,0px,0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+QScrollBar::handle:vertical{
+    width:10px;
+    background:rgba(0,0,0,25%);
+    min-height:20;
+}
+QScrollBar::handle:vertical:hover{
+    background:rgba(0,0,0,50%);
+    border:0px rgba(0,0,0,25%);
+}
+QScrollBar::sub-line:vertical{
+    height:10px;
+    border-image:url(:images/up_arrow_gray.png);
+    subcontrol-position:top;
+}
+QScrollBar::sub-line:vertical:hover{
+    height:10px;
+    background:rgba(0,0,0,25%);
+    subcontrol-position:top;
+}
+QScrollBar::add-line:vertical{
+    height:10px;
+    border-image:url(:images/down_arrow_gray.png);
+    subcontrol-position:bottom;
+}
+QScrollBar::add-line:vertical:hover{
+    height:10px;
+    background:rgba(0,0,0,25%);
+    subcontrol-position:bottom;
+}
+QScrollBar::add-page:vertical{
+    background:rgb(255,255,255);
+}
+QScrollBar::sub-page:vertical{
+    background:rgb(255,255,255);
+}
