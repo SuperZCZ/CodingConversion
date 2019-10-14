@@ -8,5 +8,5 @@
 3. 提交时请将工程文件复制到Solution下对应目录后再进行提交，不要提交源码根目录下的工程文件
 
 推荐使用:
-    Visual Studio 2019 + Qt5.x.x
-	Visual Studio 2015 + Qt5.x.x
+    Visual Studio 2019 + Qt5.12.4
+	Visual Studio 2015 + Qt5.6.0
