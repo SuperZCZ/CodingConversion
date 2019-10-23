@@ -57,6 +57,9 @@
     <QtMoc Include="CodingConversion\include\SignalController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\custom\CustomTooltipsMessage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
@@ -103,6 +106,9 @@
     <ClCompile Include="CodingConversion\src\SignalController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CodingConversion\src\custom\CustomTooltipsMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="3rd_party\libs\uchardet.lib" />
@@ -129,11 +135,20 @@
     <Image Include="Resources\BlueTheme\images\up_arrow.png" />
     <Image Include="Resources\BlueTheme\images\up_arrow_gray.png" />
     <Image Include="Resources\BlueTheme\images\x.png" />
+    <Image Include="Resources\BlueTheme\images\check-black.png" />
+    <Image Include="Resources\BlueTheme\images\check-white.png" />
+    <Image Include="Resources\BlueTheme\images\error.png" />
+    <Image Include="Resources\BlueTheme\images\information.png" />
+    <Image Include="Resources\BlueTheme\images\inquiry.png" />
+    <Image Include="Resources\BlueTheme\images\message.png" />
+    <Image Include="Resources\BlueTheme\images\success.png" />
+    <Image Include="Resources\BlueTheme\images\warning.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BlueTheme\qss\CandidateWidget.qss" />
     <None Include="Resources\BlueTheme\qss\MainWidget.qss" />
     <None Include="Resources\BlueTheme\qss\ProcessingWidget.qss" />
+    <None Include="Resources\BlueTheme\qss\CustomTooltipsMessage.qss" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\BlueTheme\BlueTheme.qrc">

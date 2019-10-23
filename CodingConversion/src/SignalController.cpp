@@ -26,3 +26,8 @@ void SignalController::registerMetaALLType()
 {
 
 }
+
+void SignalController::popupTooltipsMessage(QString text, QString title, ToolTipsType msg_type)
+{
+	emit SIG_popupTooltipsMessage(text, title, msg_type);
+}

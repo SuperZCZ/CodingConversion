@@ -19,7 +19,7 @@
 #include <QMenu>
 #include <QSplitter>
 
-
+#include "SignalController.h"
 #include "CandidateWidget.h"
 #include "ProcessingWidget.h"
 #include "custom/CustomWidget.h"
@@ -52,8 +52,12 @@ class MainWindow :public CustomWidget
 public:
 	MainWindow(QWidget* parent = NULL);
 	virtual ~MainWindow();
+
+	void initConnect();
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
+public slots:
+void popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type);
 private:
 	MainTopTitleWidget* topTitleWidget;
 

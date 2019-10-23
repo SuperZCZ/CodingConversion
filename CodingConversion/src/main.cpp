@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
 	MainWindow mainWindow;
 	mainWindow.show();
-	mainWindow.autoResizeMoveToDesktopCenter();
+	mainWindow.autoResizeMoveToDesktopCenter(0.49f,0.56f);
 
 	/*chardet::TextCodecInfo char_a;
 

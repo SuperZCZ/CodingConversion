@@ -8,8 +8,10 @@
  *
  * Describe: 主窗体widget
  */
-
+#include <QApplication>
+#include <QDesktopWidget>
 #include "mainWindow/MainWindow.h"
+#include "custom/CustomTooltipsMessage.h"
 
 const static int LEFT_WIDGET_STRETCH = 327;
 const static int RIGHT_WIDGET_STRETCH = 740;
@@ -49,7 +51,7 @@ MainTopTitleWidget::MainTopTitleWidget(QWidget* relative_widget, QWidget* parent
 	titleSettingWidget->setObjectName("titleSettingWidget");
 	titleBarWidget->setObjectName("titleBarWidget");
 	settingButt->setObjectName("settingButt");
-
+	
 }
 
 MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
@@ -82,12 +84,21 @@ MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
 	topTitleWidget->setObjectName("topTitleWidget");
 	mainWinodwSplitter->setObjectName("mainWinodwSplitter");
 
-	
+	initConnect();
 }
 
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::initConnect()
+{
+	ConnectInfo connectInfo[] = {
+		signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection,
+	};
+
+	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -97,5 +108,34 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
 	mainWinodwSplitter->setSizes(splitter_sizes);
 	CustomWidget::resizeEvent(event);
+}
+
+void MainWindow::popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type)
+{
+	QPoint show_pos = QApplication::desktop()->screenGeometry().center();
+	if (this->isVisible())
+	{
+		//如果当前主窗体可见则显示在主窗体中间
+		show_pos =  mapToGlobal(this->rect().center());
+	}
+
+	switch (msg_type)
+	{
+	case INFORMATION_TOOLTIPS:
+		CustomTooltipsMessage::information(text, title, show_pos);
+		break;
+	case CRITICAL_TOOLTIPS:
+		CustomTooltipsMessage::critical(text, title, show_pos);
+		break;
+	case SUCCESS_TOOLTIPS:
+		CustomTooltipsMessage::success(text, title, show_pos);
+		break;
+	case WARNING_TOOLTIPS:
+		CustomTooltipsMessage::warning(text, title, show_pos);
+		break;
+	default:
+		qDebug() << "ToolTips " << text << "  " << title << msg_type;
+		break;
+	}
 }
 

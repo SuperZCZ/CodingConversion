@@ -141,6 +141,7 @@ void CandidateWidget::addNewFilesOrDirs(QStringList fileList)
 			}
 			tableModel->appendRow(newItem);
 		}
+		candidateTableView->mergeDuplicatesItem(); //合并可能重复的项
 	}
 }
 
@@ -150,7 +151,22 @@ void CandidateWidget::addNewFilesOrDirs(QStringList fileList)
 CandidateTableView::CandidateTableView(CandidateToolWidget* toolWieget, QWidget* parent /*= NULL*/) :QTableView(parent)
 {
 	releativeToolWidget = toolWieget;
+	recursionCheckBox = new QCheckBox(trUtf8("递归处理子目录"), this);
 	installEventFilter(this);
+
+	recursionCheckBox->setObjectName("CheckBox");
+	recursionCheckBox->setChecked(true);
+
+	initConnect();
+}
+
+void CandidateTableView::initConnect()
+{
+	ConnectInfo connectInfo[] = {
+		recursionCheckBox,SIGNAL(stateChanged(int)),this,SLOT(mergeDuplicatesItem()),Qt::AutoConnection,
+	};
+
+	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
 void CandidateTableView::resizeEvent(QResizeEvent* event)
@@ -158,6 +174,7 @@ void CandidateTableView::resizeEvent(QResizeEvent* event)
 	QTableView::resizeEvent(event);
 	QMargins old_m = viewportMargins();
 	setViewportMargins(old_m.left(), old_m.top(), old_m.right(), 30); //保证tableview最下方有空白区域
+	recursionCheckBox->move(5, this->height() - 20);
 }
 
 bool CandidateTableView::eventFilter(QObject* object, QEvent* event)
@@ -322,3 +339,14 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 	QAbstractItemModel::endMoveRows();
 	return true;
 }
+
+
+void CandidateTableView::mergeDuplicatesItem()
+{
+	if (recursionCheckBox->isChecked())
+	{
+		signalController->popupTooltipsMessage(trUtf8("已合并重复项!"), trUtf8(""), SUCCESS_TOOLTIPS);
+	}
+}
+
+

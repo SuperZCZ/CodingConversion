@@ -81,7 +81,7 @@ void CustomWidget::autoResizeMoveToDesktopCenter(double w_percent/*=0.417*/, dou
 
 	resize(resize_width, resize_height);
 
-	move((rect.width() - resize_width) / 2, (rect.height() - resize_height) / 2);   //move 是从默认屏幕的起始点移动  扩展屏按扩展坐标算
+	move(rect.center()-this->rect().center());   //move 是从默认屏幕的起始点移动  扩展屏按扩展坐标算
 }
 
 
@@ -106,7 +106,7 @@ void CustomWidget::resizeMoveToDesktopCenter(int width_size, int height_size)
 	
 	resize(resize_width, resize_height);
 
-	move((rect.width() - resize_width) / 2, (rect.height() - resize_height) / 2);   //move 是从默认屏幕的起始点移动  扩展屏按扩展坐标算
+	move(rect.center() - this->rect().center());   //move 是从默认屏幕的起始点移动  扩展屏按扩展坐标算
 }
 
 

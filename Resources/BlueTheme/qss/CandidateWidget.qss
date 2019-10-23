@@ -120,6 +120,7 @@ QPushButton#filterSetButt{
 	max-height: 20px;
 	min-width: 75px;
 	max-width: 75px;
+	margin-left: 2px;
 	padding-left: 23px;
 	outline: none;
 	border: none;
@@ -133,7 +134,6 @@ QPushButton#filterSetButt{
 }
 
 QPushButton#filterSetButt:hover{
-	margin-left: 2px;
 	background-color: #CCE8FF;
 	font-size: 14px;
 }

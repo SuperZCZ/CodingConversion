@@ -26,6 +26,14 @@ struct ConnectInfo
 	Qt::ConnectionType connect_type;  //连接类型
 };
 
+enum ToolTipsType
+{
+	INFORMATION_TOOLTIPS = 0,
+	CRITICAL_TOOLTIPS,
+	SUCCESS_TOOLTIPS,
+	WARNING_TOOLTIPS
+};
+
 class SignalController;
 
 extern SignalController* signalController;
@@ -75,12 +83,14 @@ private:
 	explicit SignalController(const SignalController&); //禁止复制
 	SignalController& operator=(const SignalController&); //禁止赋值
 //******************************************下面添加自定义信号与槽*************************************
-
+public slots:
+void popupTooltipsMessage(QString text, QString title = "", ToolTipsType msg_type = INFORMATION_TOOLTIPS);
 signals:
 	void SIG_removeSelected();
 	void SIG_moveUpItem();
 	void SIG_moveDownItem();
 	void SIG_addNewFilesOrDirs(QStringList fileList);
+	void SIG_popupTooltipsMessage(QString text, QString title, ToolTipsType msg_type);
 public slots:
 
 

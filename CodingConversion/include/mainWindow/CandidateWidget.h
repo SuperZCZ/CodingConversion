@@ -17,6 +17,7 @@
 #include <QTableView>
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <QCheckBox>
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
@@ -32,14 +33,28 @@ public:
 	virtual ~CandidateTableView() {}
 
 	void updateToolState();
+
+	
+
+	void initConnect();
 protected:
 	void resizeEvent(QResizeEvent* event);
 	virtual bool eventFilter(QObject* object, QEvent* event);
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);	
-
+public slots:
+//************************************
+// Method:    mergeDuplicatesItem
+// FullName:  CandidateWidget::mergeDuplicatesItem
+// Access:    public 
+// Returns:   void
+// Qualifier: 合并重复项 最终结果为所有项的最小但最全的集合
+//            具体行为和设置是否递归处理子目录有关。
+//            例如：同时存在目录目录中的文件或子目录如果设置了递归处理子目录则将只保留最顶层的父目录
+//************************************
+void mergeDuplicatesItem();
 private:
-
 	CandidateToolWidget* releativeToolWidget;
+	QCheckBox* recursionCheckBox;
 };
 
 class CandidateTableModel :public QStandardItemModel
@@ -74,6 +89,9 @@ private:
 
 	CandidateTableModel *tableModel;
 
+private:
+
+	
 
 public slots:
 	void moveUpItem();

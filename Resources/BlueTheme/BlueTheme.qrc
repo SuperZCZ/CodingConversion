@@ -23,5 +23,14 @@
         <file>images/close_white.png</file>
         <file>images/file_type_icon.png</file>
         <file>images/folder_type_icon.png</file>
+        <file>images/check-black.png</file>
+        <file>images/check-white.png</file>
+        <file>images/error.png</file>
+        <file>images/information.png</file>
+        <file>images/inquiry.png</file>
+        <file>images/warning.png</file>
+        <file>images/message.png</file>
+        <file>qss/CustomTooltipsMessage.qss</file>
+        <file>images/success.png</file>
     </qresource>
 </RCC>
