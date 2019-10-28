@@ -25,7 +25,7 @@ CandidateWidget::CandidateWidget(QWidget* parent /*= NULL*/) :PainterWidget(pare
 	toolWidget = new CandidateToolWidget;
 	candidateTableView = new CandidateTableView(toolWidget, this);
 	filterWidget = new CandidateFilterWidget;
-	stateWidget = new PainterWidget;
+	stateBar= new CandidateSatusBar;
 
 	tableModel = new CandidateTableModel(candidateTableView);
 	candidateTableView->setModel(tableModel);
@@ -47,7 +47,7 @@ CandidateWidget::CandidateWidget(QWidget* parent /*= NULL*/) :PainterWidget(pare
 	vAllLay->addWidget(toolWidget);
 	vAllLay->addWidget(candidateTableView);
 	vAllLay->addWidget(filterWidget);
-	vAllLay->addWidget(stateWidget);
+	vAllLay->addWidget(stateBar);
 
 
 	setObjectName("candidateWidget");
@@ -55,7 +55,7 @@ CandidateWidget::CandidateWidget(QWidget* parent /*= NULL*/) :PainterWidget(pare
 	toolWidget->setObjectName("toolWidget");
 	candidateTableView->setObjectName("candidateTableView");
 	filterWidget->setObjectName("filterWidget");
-	stateWidget->setObjectName("stateWidget");
+	stateBar->setObjectName("stateBar");
 
 	setContentsMargins(0, 0, 1, 0);
 
@@ -71,6 +71,7 @@ void CandidateWidget::initConnect()
 		   signalController,SIGNAL(SIG_moveUpItem()),this,SLOT(moveUpItem()),Qt::AutoConnection,
 		   signalController,SIGNAL(SIG_moveDownItem()),this,SLOT(moveDownItem()),Qt::AutoConnection,
 		   signalController,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),this,SLOT(addNewFilesOrDirs(QStringList)),Qt::AutoConnection,
+		   candidateTableView,SIGNAL(updateStatusBarText(QString)),stateBar,SLOT(updateStatusText(QString)),Qt::AutoConnection,
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -115,6 +116,7 @@ void CandidateWidget::removeSelected()
 	{
 		candidateTableView->selectionModel()->select(tableModel->index(0, 0), QItemSelectionModel::Select);
 	}
+	candidateTableView->updateCountInfo();
 }
 
 void CandidateWidget::addNewFilesOrDirs(QStringList fileList)
@@ -142,6 +144,7 @@ void CandidateWidget::addNewFilesOrDirs(QStringList fileList)
 			tableModel->appendRow(newItem);
 		}
 		candidateTableView->mergeDuplicatesItem(); //合并可能重复的项
+		candidateTableView->updateCountInfo();
 	}
 }
 
@@ -332,6 +335,7 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 		/*for (int i = 0; i < count; i++) //这种移动方法适合移动数据而不是item
 		{
 			insertRow(destinationChild, item(sourceRow)->clone());
+
 			removeRow(sourceRow);
 		}*/
 	}
@@ -340,13 +344,211 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 	return true;
 }
 
-
 void CandidateTableView::mergeDuplicatesItem()
 {
 	if (recursionCheckBox->isChecked())
 	{
-		signalController->popupTooltipsMessage(trUtf8("已合并重复项!"), trUtf8(""), SUCCESS_TOOLTIPS);
+		//进行遍历去重操作
+		int index_child = 0, index_parent = 0;
+		bool should_delete = false, happened_merge = false;
+
+		for (index_child = 0; index_child < model()->rowCount(); index_child++)
+		{
+			should_delete = false;
+			QString child_path = model()->index(index_child, 0).data(Qt::DisplayRole).toString();
+			if (!QFileInfo::exists(child_path))
+			{
+				//不存在的文件也应该从列表中清除
+				should_delete = true;
+			}
+			else
+			{
+				for (index_parent = 0; index_parent < model()->rowCount(); index_parent++)
+				{
+					if (index_parent == index_child)
+					{
+						continue;
+					}
+					else
+					{
+						QString parent_path = model()->index(index_parent, 0).data(Qt::DisplayRole).toString();
+						if (isSubpathOf(child_path, parent_path))
+						{
+							//如果存在其父项则子项也应被清除
+							should_delete = true;
+							break;
+						}
+					}
+				}
+			}
+			
+			if (should_delete)
+			{
+				model()->removeRow(index_child);
+				happened_merge = true;
+				index_child--;
+			}
+		}
+		if (happened_merge)
+		{
+			//弹出气泡提示窗
+			signalController->popupTooltipsMessage(trUtf8("已合并重复项!"), trUtf8(""), INFORMATION_TOOLTIPS);
+		}
 	}
 }
 
+void CandidateTableView::updateCountInfo()
+{
+	QString infoText = trUtf8("未添加任何文件");
+	int file_num = 0;
+	int dir_num = 0;
+	int other_num = 0;
+	int sum_count = model()->rowCount();
 
+	for (int i = 0; i < model()->rowCount(); i++)
+	{
+		QFileInfo file_info(model()->index(i, 0).data(Qt::DisplayRole).toString());
+		if (file_info.isFile())
+		{
+			file_num++;
+		}
+		else if (file_info.isDir())
+		{
+			dir_num++;
+		}
+		else
+		{
+			other_num++;
+		}
+	}
+
+	if (sum_count > 0)
+	{
+		infoText = trUtf8("");
+		if (dir_num > 0)
+		{
+			if (!infoText.isEmpty())
+			{
+				infoText.append(" ");
+			}
+			infoText.append(trUtf8("目录:%1个").arg(dir_num));
+		}
+
+		if (file_num > 0)
+		{
+			if (!infoText.isEmpty())
+			{
+				infoText.append(" ");
+			}
+			infoText.append(trUtf8("文件:%1个").arg(file_num));
+		}
+
+		if (other_num > 0)
+		{
+			if (!infoText.isEmpty())
+			{
+				infoText.append(" ");
+			}
+			infoText.append(trUtf8("其他:%1个").arg(other_num));
+		}
+
+		if (sum_count > 0)
+		{
+			if (!infoText.isEmpty())
+			{
+				infoText.append(" ");
+			}
+			infoText.append(trUtf8("总计:%1项").arg(sum_count));
+		}
+
+	}
+
+	emit updateStatusBarText(infoText);
+}
+
+bool CandidateTableView::isSubpathOf(const QString &child_path, const QString &parent_path)
+{
+	bool res = false;
+	QFileInfo parent_info(parent_path);
+	if (child_path.size() <= 0 || parent_path.size() <= 0)
+	{
+		return res;
+	}
+	if (parent_info.isDir())
+	{
+		//如果是目录就判断child_path是否为parent_path子孙目录或文件
+		int index = 0;
+		QString dst_path = parent_path;
+		QString src_path = child_path;
+		if (!dst_path.endsWith("/"))
+		{
+			dst_path.append("/");
+		}
+		index = 0;
+		while (index < dst_path.size() && index < src_path.size() && dst_path[index] == src_path[index])
+		{
+			index++;
+		}
+		if (index == dst_path.size() || index == src_path.size())
+		{
+			if (index == dst_path.size() && (index == src_path.size() || src_path[index - 1] == '/'))
+			{
+				//匹配到完整的目的路径
+				//  /home/  ---  /home/ | /home/file.1 
+				res = true;
+			}
+			else
+			{
+				
+				if ((index + 1) == dst_path.size() && index == src_path.size() && dst_path[index] == '/')
+				{
+					//检查是否只剩目的路径的结尾 / 没有匹配
+					// /home/ ----- /home 
+					res = true;
+				}
+			}
+		}
+	}
+	else if (parent_info.isFile())
+	{
+		//如果是文件就比较两个路径是否相同
+		if (parent_path.compare(child_path) == 0)
+		{
+			res = true;
+		}
+	}
+	return res;
+}
+
+CandidateSatusBar::CandidateSatusBar(QWidget *parent /*= NULL*/) :PainterWidget(parent)
+{
+	vAllLay = new QVBoxLayout(this);
+	info_HLay = new QHBoxLayout;
+
+	info_label = new QLabel(trUtf8("未添加任何文件"));
+
+	info_label->adjustSize();
+	info_label->setAlignment(Qt::AlignRight);
+
+	info_HLay->setMargin(0);
+	info_HLay->setSpacing(0);
+	info_HLay->addStretch(1);
+	info_HLay->addWidget(info_label);
+
+	vAllLay->setMargin(0);
+	vAllLay->setSpacing(0);
+	vAllLay->setAlignment(Qt::AlignCenter);
+	vAllLay->addLayout(info_HLay);
+
+	info_label->setObjectName("statusInfoLabel");
+}
+
+CandidateSatusBar::~CandidateSatusBar()
+{
+
+}
+
+void CandidateSatusBar::updateStatusText(QString text)
+{
+	info_label->setText(text);
+}

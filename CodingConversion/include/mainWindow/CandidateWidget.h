@@ -33,14 +33,13 @@ public:
 	virtual ~CandidateTableView() {}
 
 	void updateToolState();
-
-	
-
 	void initConnect();
 protected:
 	void resizeEvent(QResizeEvent* event);
 	virtual bool eventFilter(QObject* object, QEvent* event);
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);	
+signals:
+	void updateStatusBarText(QString text);
 public slots:
 //************************************
 // Method:    mergeDuplicatesItem
@@ -52,9 +51,22 @@ public slots:
 //            例如：同时存在目录目录中的文件或子目录如果设置了递归处理子目录则将只保留最顶层的父目录
 //************************************
 void mergeDuplicatesItem();
+
+void updateCountInfo();
 private:
 	CandidateToolWidget* releativeToolWidget;
 	QCheckBox* recursionCheckBox;
+
+	//************************************
+	// Method:    isSubpathOf
+	// FullName:  CandidateTableView::isSubpathOf
+	// Access:    private 
+	// Returns:   bool
+	// Qualifier: 判断child_path是否为parent_path的子孙目录
+	// Parameter: const QString & child_path
+	// Parameter: const QString & parent_path
+	//************************************
+	bool isSubpathOf(const QString &child_path, const QString &parent_path);
 };
 
 class CandidateTableModel :public QStandardItemModel
@@ -66,6 +78,22 @@ public:
 
 protected:
 	virtual bool moveRows(const QModelIndex& sourceParent, int sourceRow, int count, const QModelIndex& destinationParent, int destinationChild);
+};
+
+
+class CandidateSatusBar :public PainterWidget
+{
+	Q_OBJECT
+public:
+	CandidateSatusBar(QWidget *parent = NULL);
+	~CandidateSatusBar();
+public slots:
+	void updateStatusText(QString text);
+protected:
+private:
+	QVBoxLayout *vAllLay;
+	QHBoxLayout *info_HLay;
+	QLabel *info_label;
 };
 
 
@@ -85,7 +113,7 @@ private:
 	CandidateToolWidget* toolWidget;
 	CandidateTableView* candidateTableView;
 	CandidateFilterWidget* filterWidget;
-	PainterWidget* stateWidget;
+	CandidateSatusBar* stateBar;
 
 	CandidateTableModel *tableModel;
 

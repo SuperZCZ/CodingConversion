@@ -134,7 +134,7 @@ void MainWindow::popupToolTipsMessage(QString text, QString title, ToolTipsType 
 		CustomTooltipsMessage::warning(text, title, show_pos);
 		break;
 	default:
-		qDebug() << "ToolTips " << text << "  " << title << msg_type;
+		qDebug() << "ToolTipsMessage " << text << "  " << title << msg_type;
 		break;
 	}
 }

@@ -24,10 +24,15 @@ QWidget#filterWidget{
 	background-color: transparent;
 }
 
-QWidget#stateWidget{
+QWidget#stateBar{
 	min-height: 25px;
 	max-height: 25px;
 	background-color: #F0F0F0;
+}
+
+QLabel#statusInfoLabel{
+	padding-right: 5px;
+	color: gray;
 }
 
 QLabel#toolInfoLabel{
