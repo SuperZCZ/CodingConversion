@@ -18,6 +18,8 @@
 #include <QTimer>
 #include <QPropertyAnimation>
 #include <QPoint>
+
+#include "CharGlobal.h"
 //弹出气泡信息 2.5s后逐渐透明并自动析构  在气泡上按下鼠标恢复初始状态 释放鼠标从新进入消失过程 双击关闭(戳破)气泡 
 class CustomTooltipsMessage :public QWidget
 {

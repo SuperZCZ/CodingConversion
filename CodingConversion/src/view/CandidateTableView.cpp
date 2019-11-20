@@ -71,6 +71,7 @@ void CandidateTableView::addNewFilesOrDirs(QStringList fileList)
 		if (!fileList[i].isEmpty())
 		{
 			QStandardItem* newItem = new QStandardItem(fileList[i]);
+			newItem->setEditable(false);
 			newItem->setToolTip(fileList[i]);
 
 			QFileInfo fileInfo(fileList[i]);

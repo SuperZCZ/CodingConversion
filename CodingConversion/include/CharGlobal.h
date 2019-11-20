@@ -16,6 +16,6 @@
 #pragma execution_character_set("utf-8")
 #endif // 
 
-
+#define PRODUCT_VERSION "0.0.1"
 
 #endif

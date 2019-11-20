@@ -32,5 +32,12 @@
         <file>images/message.png</file>
         <file>qss/CustomTooltipsMessage.qss</file>
         <file>images/success.png</file>
+        <file>qss/CustomMessageBox.qss</file>
+        <file>images/x_white.png</file>
+        <file>qss/AboutDialog.qss</file>
+        <file>images/max_white.png</file>
+        <file>images/mini_white.png</file>
+        <file>images/normal_white.png</file>
+        <file>qss/FilterEditWidget.qss</file>
     </qresource>
 </RCC>

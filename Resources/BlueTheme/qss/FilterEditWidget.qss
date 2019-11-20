@@ -1,0 +1,193 @@
+﻿QDialog#FilterEditWidget {
+	border: 1px solid;
+	border-color: rgba(96,96,96,170);
+	background-color: rgba(255,255,255,255);
+}
+
+QWidget#CustomTitleBar{
+	margin-right: 2px;   /*防止左侧遮挡父窗体的border*/
+	min-height: 25px;
+	max-height: 25px;
+	background-color: rgba(96,96,96,255);
+}
+
+QLabel#titleLabel{
+	/*设置字体和字体颜色*/
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 170px;
+	max-width: 170px;
+	background-color: rgba(0,0,0,0);
+	font-size: 12px;
+	color: rgb(255,255,255);
+	font-weight: bold;
+}
+
+QPushButton#miniSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/mini_white.png");
+}
+
+QPushButton#miniSizeButt:hover{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/mini_white.png");
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#maxNormalSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	background-color: rgba(255,255,0,200);
+}
+
+QPushButton#maxNormalSizeButt[showMax=true]{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	background-color: rgba(255,255,255,100);
+}
+
+QPushButton#closeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/x_white.png");
+}
+
+QPushButton#closeButt:hover{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/x_white.png");
+	background-color: rgb(231,68,80);
+}
+
+QPushButton#normalButt{
+	outline: none;
+	min-height: 23px;
+	max-height: 23px;
+	min-width: 75px;
+	max-width: 75px;
+	border: 1px solid gray;
+	color: #7C7C7E;
+	background-color: transparent;
+}
+
+QPushButton#normalButt:focus
+{
+	outline: none;
+	border: 2px solid #3785D4;
+}
+
+QPushButton#normalButt:hover{
+	outline: none;
+	background-color: #A7D3F2;
+}
+
+
+QPushButton#addButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/list_add.png");
+}
+
+QPushButton#addButt:disabled{
+	image: url(":/images/list_add_gray.png");
+}
+
+QPushButton#addButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+
+
+QPushButton#delButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/list_del.png");
+}
+
+QPushButton#delButt:disabled{
+	image: url(":/images/list_del_gray.png");
+}
+
+QPushButton#delButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+
+QPushButton#upButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/up_arrow.png");
+}
+
+QPushButton#upButt:disabled{
+	image: url(":/images/up_arrow_gray.png");
+}
+
+QPushButton#upButt:!disabled:hover{
+	background-color: #D1EAFF;
+}
+
+
+QPushButton#downButt{
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	outline: none;
+	border: none;
+	image: url(":/images/down_arrow.png");
+}
+
+QPushButton#downButt:disabled{
+	image: url(":/images/down_arrow_gray.png");
+}
+
+QPushButton#downButt:!disabled:hover{
+	background-color: #D1EAFF;
+}

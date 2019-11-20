@@ -60,6 +60,27 @@
     <QtMoc Include="CodingConversion\include\custom\CustomTooltipsMessage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\CandidateTableView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewModel\CandidateTableModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\CandidateSatusBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\custom\CustomDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\custom\CustomMessageBox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\dialog\AboutDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\FilterEditWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
@@ -109,6 +130,27 @@
     <ClCompile Include="CodingConversion\src\custom\CustomTooltipsMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewModel\CandidateTableModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\candidate\CandidateSatusBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\dialog\AboutDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\custom\CustomMessageBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\custom\CustomDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\candidate\FilterEditWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="3rd_party\libs\uchardet.lib" />
@@ -143,12 +185,19 @@
     <Image Include="Resources\BlueTheme\images\message.png" />
     <Image Include="Resources\BlueTheme\images\success.png" />
     <Image Include="Resources\BlueTheme\images\warning.png" />
+    <Image Include="Resources\BlueTheme\images\max_white.png" />
+    <Image Include="Resources\BlueTheme\images\mini_white.png" />
+    <Image Include="Resources\BlueTheme\images\normal_white.png" />
+    <Image Include="Resources\BlueTheme\images\x_white.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BlueTheme\qss\CandidateWidget.qss" />
     <None Include="Resources\BlueTheme\qss\MainWidget.qss" />
     <None Include="Resources\BlueTheme\qss\ProcessingWidget.qss" />
     <None Include="Resources\BlueTheme\qss\CustomTooltipsMessage.qss" />
+    <None Include="Resources\BlueTheme\qss\CustomMessageBox.qss" />
+    <None Include="Resources\BlueTheme\qss\AboutDialog.qss" />
+    <None Include="Resources\BlueTheme\qss\FilterEditWidget.qss" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\BlueTheme\BlueTheme.qrc">

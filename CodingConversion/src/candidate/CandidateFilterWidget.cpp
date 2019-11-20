@@ -9,7 +9,12 @@
  * Describe: 过滤器
  */
 
+#include <QVariant>
+#include <QList>
+
+#include "SignalController.h"
 #include "candidate/CandidateFilterWidget.h"
+#include "candidate/FilterEditWidget.h"
 
 CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :PainterWidget(parent)
 {
@@ -30,13 +35,12 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 	filterTabBar->setUsesScrollButtons(true); //启用左右滚动按钮
 	filterTabBar->setElideMode(Qt::ElideRight);
 
-
-	filterTabBar->addTab(trUtf8("*"));
-	filterTabBar->addTab(trUtf8("txt"));
-	
-	filterTabBar->setTabTextColor(0, QColor(255, 255, 255)); //白色代表匹配
-	filterTabBar->setTabTextColor(1, QColor(255, 0, 0));     //红色代表不匹配
-
+	QList<QVariant> def_filters;
+	FilterItem def_item;
+	def_item.type = 1;
+	def_item.filter_name = trUtf8("*");
+	def_filters << QVariant::fromValue<FilterItem>(def_item);
+	updateFilter(def_filters);
 
 	buttHLay->setMargin(0);
 	buttHLay->setAlignment(Qt::AlignVCenter);
@@ -55,12 +59,74 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 	filterSetButt->setObjectName("filterSetButt");
 	filterTabBar->setObjectName("filterTabBar");
 
+	initConnect();
+}
 
-	connect(filterTabBar, SIGNAL(tabCloseRequested(int)), this, SLOT(handleTabCloseClicked(int)));
+void CandidateFilterWidget::initConnect()
+{
+	ConnectInfo connectInfo[] = {
+		filterTabBar,SIGNAL(tabCloseRequested(int)), this, SLOT(handleTabCloseClicked(int)),Qt::AutoConnection,
+		filterSetButt,SIGNAL(clicked()),this,SLOT(settingFilter()),Qt::AutoConnection,
+
+	};
+
+	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
 void CandidateFilterWidget::handleTabCloseClicked(int index)
 {
-	qDebug() << "close " << index;
+	//qDebug() << "close " << index;
 	filterTabBar->removeTab(index);
+}
+
+void CandidateFilterWidget::settingFilter()
+{
+	FilterEditWidget *filter_edit = new FilterEditWidget(this);
+	QList<QVariant> filter_list;
+
+	for (int i = 0; i < filterTabBar->count(); i++)
+	{
+		filter_list << filterTabBar->tabData(i);
+	}
+
+	filter_edit->setFilterList(filter_list);
+
+	filter_edit->resize(500, 300);
+	filter_edit->open();
+}
+
+void CandidateFilterWidget::clearAllFilter()
+{
+	int i = filterTabBar->count() - 1;
+	for (; i >= 0; i--)
+	{
+		filterTabBar->removeTab(i);
+	}
+}
+
+void CandidateFilterWidget::updateFilter(QList<QVariant> filter_list)
+{
+	clearAllFilter(); //清空所有
+	for (int i = 0; i < filter_list.size(); i++)
+	{
+		FilterItem filter_item = filter_list[i].value<FilterItem>();
+		if (filter_item.filter_name.isEmpty())
+		{
+			continue;
+		}
+
+		int index = filterTabBar->addTab(filter_item.filter_name);
+		if (index >= 0)
+		{
+			if (filter_item.type == 0)
+			{
+				filterTabBar->setTabTextColor(index, QColor(255, 0, 0));     //红色代表不匹配
+			}
+			else
+			{
+				filterTabBar->setTabTextColor(index, QColor(255, 255, 255)); //白色代表匹配	
+			}
+			filterTabBar->setTabData(index, filter_list[i]);
+		}
+	}
 }

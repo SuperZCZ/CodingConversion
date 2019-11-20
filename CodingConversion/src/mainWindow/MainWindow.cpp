@@ -12,6 +12,8 @@
 #include <QDesktopWidget>
 #include "mainWindow/MainWindow.h"
 #include "custom/CustomTooltipsMessage.h"
+#include "custom/CustomMessageBox.h"
+#include "dialog/AboutDialog.h"
 
 const static int LEFT_WIDGET_STRETCH = 327;
 const static int RIGHT_WIDGET_STRETCH = 740;
@@ -30,7 +32,8 @@ MainTopTitleWidget::MainTopTitleWidget(QWidget* relative_widget, QWidget* parent
 
 	settingButt->setMenu(settingMenu);
 
-	settingMenu->addAction(trUtf8("关于"));
+	QAction *about_act = settingMenu->addAction(trUtf8("关于"));
+	about_act->setData(trUtf8("PopUpAboutDialog"));
 
 	titleLabelWidget->createTitleBar(relative_widget, true, true, false, false, false, true);
 	titleBarWidget->createTitleBar(relative_widget, false, false, true, true, true, true);
@@ -51,7 +54,17 @@ MainTopTitleWidget::MainTopTitleWidget(QWidget* relative_widget, QWidget* parent
 	titleSettingWidget->setObjectName("titleSettingWidget");
 	titleBarWidget->setObjectName("titleBarWidget");
 	settingButt->setObjectName("settingButt");
-	
+
+	initConnect();
+}
+
+void MainTopTitleWidget::initConnect()
+{
+	ConnectInfo connectInfo[] = {
+		settingMenu,SIGNAL(triggered(QAction *)),this,SIGNAL(menuActionClicked(QAction *)),Qt::AutoConnection,
+	};
+
+	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
 MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
@@ -96,6 +109,7 @@ void MainWindow::initConnect()
 {
 	ConnectInfo connectInfo[] = {
 		signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection,
+		topTitleWidget,SIGNAL(menuActionClicked(QAction *)),this,SLOT(handleAction(QAction *)),Qt::AutoConnection
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -136,6 +150,19 @@ void MainWindow::popupToolTipsMessage(QString text, QString title, ToolTipsType 
 	default:
 		qDebug() << "ToolTipsMessage " << text << "  " << title << msg_type;
 		break;
+	}
+}
+
+void MainWindow::handleAction(QAction *action)
+{
+	if (action == NULL)
+	{
+		return;
+	}
+	if (action->data().toString() == trUtf8("PopUpAboutDialog"))
+	{
+		AboutDialog *about_dialog = new AboutDialog;
+		about_dialog->show();
 	}
 }
 
