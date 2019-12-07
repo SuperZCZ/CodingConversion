@@ -28,6 +28,8 @@ class CandidateFilterWidget:public PainterWidget
 public:
 	CandidateFilterWidget(QWidget* parent = NULL);
 	virtual ~CandidateFilterWidget() {}
+
+	void initConnect();
 protected:
 private:
 	QVBoxLayout* vAllLay;
@@ -36,8 +38,15 @@ private:
 
 	QPushButton* filterSetButt;
 	QTabBar* filterTabBar;
+
+	void addDefaultFilter();
+
 public slots:
 	void handleTabCloseClicked(int index);
+	void settingFilter();
+	void clearAllFilter();
+	void updateFilter(QList<QVariant> filter_list);
+
 };
 
 #endif

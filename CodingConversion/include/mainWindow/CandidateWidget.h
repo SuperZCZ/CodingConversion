@@ -17,41 +17,15 @@
 #include <QTableView>
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <QCheckBox>
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
 #include "candidate/CandidateToolWidget.h"
 #include "candidate/CandidateFilterWidget.h"
-
-
-class CandidateTableView :public QTableView
-{
-	Q_OBJECT
-public:
-	CandidateTableView(CandidateToolWidget* toolWieget, QWidget* parent = NULL);
-	virtual ~CandidateTableView() {}
-
-	void updateToolState();
-protected:
-	void resizeEvent(QResizeEvent* event);
-	virtual bool eventFilter(QObject* object, QEvent* event);
-	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);	
-
-private:
-
-	CandidateToolWidget* releativeToolWidget;
-};
-
-class CandidateTableModel :public QStandardItemModel
-{
-	Q_OBJECT
-public:
-	CandidateTableModel(QObject* parent = NULL) :QStandardItemModel(parent) {}
-	virtual ~CandidateTableModel() {}
-
-protected:
-	virtual bool moveRows(const QModelIndex& sourceParent, int sourceRow, int count, const QModelIndex& destinationParent, int destinationChild);
-};
+#include "candidate/CandidateSatusBar.h"
+#include "view/CandidateTableView.h"
+#include "viewModel/CandidateTableModel.h"
 
 
 class CandidateWidget :public PainterWidget
@@ -70,16 +44,9 @@ private:
 	CandidateToolWidget* toolWidget;
 	CandidateTableView* candidateTableView;
 	CandidateFilterWidget* filterWidget;
-	PainterWidget* stateWidget;
+	CandidateSatusBar* stateBar;
 
 	CandidateTableModel *tableModel;
-
-
-public slots:
-	void moveUpItem();
-	void moveDownItem();
-	void removeSelected();
-	void addNewFilesOrDirs(QStringList fileList);
 };
 
 #endif

@@ -1,0 +1,172 @@
+QDialog#AboutDialog{
+    border: 1px solid;
+	border-color: rgba(96,96,96,170);
+	background-color: rgba(255,255,255,255);
+}
+
+QWidget#CustomTitleBar{
+	margin-right: 2px;   /*防止左侧遮挡父窗体的border*/
+	min-height: 25px;
+	max-height: 25px;
+	background-color: rgba(96,96,96,255);
+}
+
+QLabel#iconLabel{
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 20px;
+	max-width: 20px;
+	margin-left: 3px;
+	margin-right: 3px;
+	image: url(":/images/logo.png");
+	image-position: center;
+}
+
+
+QLabel#titleLabel{
+	/*设置字体和字体颜色*/
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 170px;
+	max-width: 170px;
+	background-color: rgba(0,0,0,0);
+	font-size: 12px;
+	color: rgb(255,255,255);
+	font-weight: bold;
+}
+
+QPushButton#miniSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/mini_white.png");
+}
+
+QPushButton#miniSizeButt:hover{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/mini_white.png");
+	background-color: rgb(229,229,229);
+}
+
+QPushButton#maxNormalSizeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	background-color: rgba(255,255,0,200);
+}
+
+QPushButton#maxNormalSizeButt[showMax=true]{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	background-color: rgba(255,255,255,100);
+}
+
+QPushButton#closeButt{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/x_white.png");
+}
+
+QPushButton#closeButt:hover{
+	border: none;
+	outline: none;
+	margin: 0px;
+	min-height: 25px;
+	max-height: 25px;
+	min-width: 25px;
+	max-width: 25px;
+	image: url(":/images/x_white.png");
+	background-color: rgb(231,68,80);
+}
+
+
+QPushButton#messageButton{
+	border: 1px solid;
+	border-color: #abbbcb;
+	outline: none;
+	margin: 0px;
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 60px;
+	max-width: 60px;
+	background-color: rgb(255,255,255);
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	color: rgba(96,96,96,255);
+}
+
+
+QPushButton#messageButton:hover{
+	border-color: #1296DB;
+}
+
+QPushButton#messageButton:pressed{
+	background-color: #e3f5ff;
+}
+
+QPushButton#messageButton:focus{
+	background-color: #E8E8E7;
+}
+
+
+QLabel#logoLabel{
+	min-height: 70px;
+	max-height: 70px;
+	min-width: 70px;
+	max-width: 70px;
+	border-image: url(":/images/logo.png");
+}
+
+QLabel#nameLabel{
+	color: black;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+QTextEdit#decTextEdit{
+	border: 1px solid gray;
+	min-height: 100px;
+	max-height: 100px;
+	max-width: 200px;
+	min-width: 200px;
+}
+
+QPushButton#qtAboutButt{
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 80px;
+	max-width: 80px;
+	border: 1px solid gray;
+	outline: none;
+}
+
+QPushButton#qtAboutButt:hover{
+	background-color: #9BCBF0;
+}
+
+

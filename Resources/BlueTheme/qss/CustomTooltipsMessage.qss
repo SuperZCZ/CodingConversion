@@ -1,0 +1,51 @@
+QWidget#CustomTooltipsMessage{
+	border: 1px solid gray;
+	border-radius: 10px;
+	background-color: white;
+}
+
+QLabel#TooltipsTitle{
+	font-size: 15px;
+	color: black;
+}
+
+QLabel#TooltipsText{
+	font-size: 15px;
+	color: black;
+}
+
+QLabel#messageCriticalIcon{
+	min-height: 35px;
+	max-height: 35px;
+	min-width: 35px;
+	max-width: 35px;
+	border-image: url(":/images/error.png") 0 0 0 0;
+	border: none;
+}
+QLabel#messageInformationIcon{
+	min-height: 35px;
+	max-height: 35px;
+	min-width: 35px;
+	max-width: 35px;
+	border-image: url(":/images/information.png") 0 0 0 0;
+	border: none;
+}
+QLabel#messageSuccessIcon{
+	min-height: 35px;
+	max-height: 50px;
+	min-width: 35px;
+	max-width: 35px;
+	border-image: url(":/images/success.png") 0 0 0 0;
+	border: none;
+}
+
+QLabel#messageWarningIcon{
+	min-height: 35px;
+	max-height: 35px;
+	min-width: 35px;
+	max-width: 35px;
+	border-image: url(":/images/warning.png") 0 0 0 0;
+	border: none;
+}
+
+

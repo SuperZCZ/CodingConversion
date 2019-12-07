@@ -17,9 +17,10 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QMenu>
+#include <QAction>
 #include <QSplitter>
 
-
+#include "SignalController.h"
 #include "CandidateWidget.h"
 #include "ProcessingWidget.h"
 #include "custom/CustomWidget.h"
@@ -32,6 +33,8 @@ class MainTopTitleWidget:public PainterWidget
 public:
 	MainTopTitleWidget(QWidget* relative_widget, QWidget* parent = NULL);
  	virtual ~MainTopTitleWidget() {}
+
+	void initConnect();
 private:
 	QHBoxLayout* hAllLay;
 
@@ -43,6 +46,8 @@ private:
 	QPushButton* settingButt;
 	QMenu* settingMenu;
 
+signals:
+	void menuActionClicked(QAction *action);
 };
 
 
@@ -52,8 +57,13 @@ class MainWindow :public CustomWidget
 public:
 	MainWindow(QWidget* parent = NULL);
 	virtual ~MainWindow();
+
+	void initConnect();
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
+public slots:
+void popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type);
+void handleAction(QAction *action);
 private:
 	MainTopTitleWidget* topTitleWidget;
 

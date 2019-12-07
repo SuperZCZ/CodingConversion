@@ -233,3 +233,38 @@ QScrollBar::add-page:vertical{
 QScrollBar::sub-page:vertical{
     background:rgb(255,255,255);
 }
+
+QCheckBox#CheckBox {
+	spacing: 5px;
+}
+
+QCheckBox#CheckBox::indicator {
+	width: 12px;
+	height: 12px;
+	border: 1px solid #1F81DE;
+}
+
+QCheckBox#CheckBox::indicator:hover {
+	background-color: rgb(167, 208, 224);
+}
+
+
+QCheckBox#CheckBox::indicator:unchecked {
+	image: none;
+}
+
+QCheckBox#CheckBox::indicator:checked {
+	image: url(":/images/check-black.png");
+}
+
+QCheckBox#CheckBox::indicator:unchecked:disabled  {
+	border: 1px solid gray;
+	background-color:  white;
+	image: none;
+}
+
+QCheckBox#CheckBox::indicator:checked:disabled  {
+	border: 1px solid gray;
+	background-color:  rgb(209, 208, 208);
+	image: url(":/images/check-white.png");
+}

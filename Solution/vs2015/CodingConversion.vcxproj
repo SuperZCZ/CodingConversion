@@ -18,8 +18,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
+    <QtMoc Include="CodingConversion\include\custom\CustomDialog.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\custom\CustomMessageBox.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\dialog\AboutDialog.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\CandidateSatusBar.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\candidate\FilterEditWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h" />
     <ClInclude Include="CodingConversion\include\CharGlobal.h" />
+    <QtMoc Include="CodingConversion\include\viewModel\CandidateTableModel.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\CandidateTableView.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\custom\CustomTooltipsMessage.h" />
     <QtMoc Include="CodingConversion\include\SignalController.h" />
     <QtMoc Include="CodingConversion\include\viewDelegate\CandidateFileDelegate.h" />
     <QtMoc Include="CodingConversion\include\mainWindow\ProcessingWidget.h" />
@@ -30,45 +59,69 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodingConversion\src\candidate\CandidateFilterWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\candidate\CandidateSatusBar.cpp" />
     <ClCompile Include="CodingConversion\src\candidate\CandidateToolWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\candidate\FilterEditWidget.cpp" />
     <ClCompile Include="CodingConversion\src\charDetect\CharDetect.cpp" />
+    <ClCompile Include="CodingConversion\src\custom\CustomDialog.cpp" />
+    <ClCompile Include="CodingConversion\src\custom\CustomMessageBox.cpp" />
     <ClCompile Include="CodingConversion\src\custom\CustomTitleBar.cpp" />
+    <ClCompile Include="CodingConversion\src\custom\CustomTooltipsMessage.cpp" />
     <ClCompile Include="CodingConversion\src\custom\CustomWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\dialog\AboutDialog.cpp" />
     <ClCompile Include="CodingConversion\src\main.cpp" />
     <ClCompile Include="CodingConversion\src\mainWindow\CandidateWidget.cpp" />
     <ClCompile Include="CodingConversion\src\mainWindow\MainWindow.cpp" />
     <ClCompile Include="CodingConversion\src\mainWindow\ProcessingWidget.cpp" />
     <ClCompile Include="CodingConversion\src\SignalController.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\CandidateFileDelegate.cpp" />
+    <ClCompile Include="CodingConversion\src\viewModel\CandidateTableModel.cpp" />
+    <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="3rd_party\libs\uchardet.lib" />
     <Library Include="3rd_party\libs\uchardetd.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\BlueTheme\images\check-black.png" />
+    <Image Include="Resources\BlueTheme\images\check-white.png" />
     <Image Include="Resources\BlueTheme\images\close_black.png" />
     <Image Include="Resources\BlueTheme\images\close_red.png" />
     <Image Include="Resources\BlueTheme\images\close_white.png" />
     <Image Include="Resources\BlueTheme\images\down_arrow.png" />
     <Image Include="Resources\BlueTheme\images\down_arrow_gray.png" />
+    <Image Include="Resources\BlueTheme\images\error.png" />
     <Image Include="Resources\BlueTheme\images\file_type_icon.png" />
     <Image Include="Resources\BlueTheme\images\folder_type_icon.png" />
     <Image Include="Resources\BlueTheme\images\hamburg.png" />
+    <Image Include="Resources\BlueTheme\images\information.png" />
+    <Image Include="Resources\BlueTheme\images\inquiry.png" />
     <Image Include="Resources\BlueTheme\images\list_add.png" />
     <Image Include="Resources\BlueTheme\images\list_add_gray.png" />
     <Image Include="Resources\BlueTheme\images\list_del.png" />
     <Image Include="Resources\BlueTheme\images\list_del_gray.png" />
     <Image Include="Resources\BlueTheme\images\logo.png" />
     <Image Include="Resources\BlueTheme\images\max.png" />
+    <Image Include="Resources\BlueTheme\images\max_white.png" />
+    <Image Include="Resources\BlueTheme\images\message.png" />
     <Image Include="Resources\BlueTheme\images\mini.png" />
+    <Image Include="Resources\BlueTheme\images\mini_white.png" />
     <Image Include="Resources\BlueTheme\images\normal.png" />
+    <Image Include="Resources\BlueTheme\images\normal_white.png" />
     <Image Include="Resources\BlueTheme\images\settings_20px.png" />
+    <Image Include="Resources\BlueTheme\images\success.png" />
     <Image Include="Resources\BlueTheme\images\up_arrow.png" />
     <Image Include="Resources\BlueTheme\images\up_arrow_gray.png" />
+    <Image Include="Resources\BlueTheme\images\warning.png" />
     <Image Include="Resources\BlueTheme\images\x.png" />
+    <Image Include="Resources\BlueTheme\images\x_white.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BlueTheme\qss\AboutDialog.qss" />
     <None Include="Resources\BlueTheme\qss\CandidateWidget.qss" />
+    <None Include="Resources\BlueTheme\qss\CustomMessageBox.qss" />
+    <None Include="Resources\BlueTheme\qss\CustomTooltipsMessage.qss" />
+    <None Include="Resources\BlueTheme\qss\FilterEditWidget.qss" />
     <None Include="Resources\BlueTheme\qss\MainWidget.qss" />
     <None Include="Resources\BlueTheme\qss\ProcessingWidget.qss" />
   </ItemGroup>

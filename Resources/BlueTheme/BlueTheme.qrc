@@ -23,5 +23,24 @@
         <file>images/close_white.png</file>
         <file>images/file_type_icon.png</file>
         <file>images/folder_type_icon.png</file>
+        <file>images/check-black.png</file>
+        <file>images/check-white.png</file>
+        <file>images/error.png</file>
+        <file>images/information.png</file>
+        <file>images/inquiry.png</file>
+        <file>images/warning.png</file>
+        <file>images/message.png</file>
+        <file>qss/CustomTooltipsMessage.qss</file>
+        <file>images/success.png</file>
+        <file>qss/CustomMessageBox.qss</file>
+        <file>images/x_white.png</file>
+        <file>qss/AboutDialog.qss</file>
+        <file>images/max_white.png</file>
+        <file>images/mini_white.png</file>
+        <file>images/normal_white.png</file>
+        <file>qss/FilterEditWidget.qss</file>
+        <file>images/add_sub.png</file>
+        <file>images/add.png</file>
+        <file>images/sub.png</file>
     </qresource>
 </RCC>
