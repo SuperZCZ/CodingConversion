@@ -111,23 +111,14 @@ protected:
 	QVBoxLayout *vAllLay;  //窗体的垂直布局 Layout  请在子类 中对其中添加widget 或其他 layout
 private:
 
-	Direction dir;
-	QCursor nowCursor;     //记录当前鼠标形状 用于缩放完恢复鼠标形状
-	QPoint beforPoint;     //记录鼠标之前的位置 和当前位置作差 获取缩放大小
-	bool isLeftPressDown;  //左键是否按下
+	Direction dir;      //记录激活缩放时鼠标位于窗体的哪个边缘区域 UP, DOWN, LEFT, RIGHT, LEFTTOP, LEFTBOTTOM, RIGHTBOTTOM, RIGHTTOP
+	QCursor beforScaleCursor;   //记录激活缩放前鼠标形状 用于缩放完恢复鼠标形状
+	QPoint scalePressGlobalPos;     //记录激活缩放时鼠标的全局位置 用于计算应改变的大小
+	QRect scaleWidgetGeometry;         //记录激活缩放时窗体的大小和相对位置 用于计算缩放后应处于的位置(相对全局或父widget)和大小
+	bool isLeftPressDown;       //左键是否按下
 	bool enableMouseScale;
 
-	static const int Padding = MOUSE_TRACK_PADDING; //可唤醒缩放鼠标的内边距大小 
-
-	//************************************
-	// Method:    reSetCursor
-	// FullName:  CustomWidget::reSetCursor
-	// Access:    private 
-	// Returns:   void
-	// Qualifier: 根据鼠标在窗体的位置改变鼠标形状
-	// Parameter: const QPoint &
-	//************************************
-	void reSetCursor(const QPoint &currentPoint);
+	static const int Padding = MOUSE_TRACK_PADDING; //可唤醒缩放鼠标的内边距大小
 };
 
 

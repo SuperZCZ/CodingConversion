@@ -133,7 +133,6 @@ CustomTitleBar::CustomTitleBar(QWidget *parnet,
 {
 	setObjectName("CustomTitleBar");
 
-	parentWidget = parnet;
 	moveRelativeWidget = relative_widget;
 	closeRelativeWidget = close_widget;
 	leftMousePressed = false;
@@ -283,21 +282,6 @@ void CustomTitleBar::updateDisplay()
     mini_enable==true? miniSizeButt->show():miniSizeButt->hide();
     max_normale_enable==true? maxNormalSizeButt->show():maxNormalSizeButt->hide();
     close_enable==true? closeButt->show():closeButt->hide();
-
-	if (parentWidget == NULL)
-    {
-        qDebug() << "CustomTitleBar parentWidget is NULL!!!!";
-    }
-    else
-    {
-		if (!isLayout)
-		{
-			//绝对布局时  需手动改变宽度和位置
-			this->move(0,0);  //这里是移动到父窗体的(0,0)左上角   而不是关系窗体的(0,0)左上角！！！！！
-			this->resize(parentWidget->width(), this->height());
-		}
-    }
-
 }
 
 
@@ -305,55 +289,90 @@ void CustomTitleBar::updateDisplay()
 //*********************************************protected function********************************************
 void CustomTitleBar::mousePressEvent(QMouseEvent *event)
 {
-	if (moveRelativeWidget != NULL && closeRelativeWidget != NULL && event->button() == Qt::LeftButton)
+	if ((moveRelativeWidget != NULL || closeRelativeWidget != NULL) && event->button() == Qt::LeftButton)
 	{
-		int dir_type;
-		QPoint current_point;
-		if (closeRelativeWidget->parent() != NULL)
+		int dir_type = 0;
+
+		//缩放优先级高于移动优先级 先检测是否位于激活缩放的区域
+		if (enableMouseScale && closeRelativeWidget != NULL)
 		{
-			//如果关闭窗体不是最桌面上的窗体 使用鼠标相对于标题栏的位置
-			current_point = event->pos();
-		}
-		else
-		{
-			//如果关闭窗体是最顶层窗体 使用鼠标相对于关闭窗体的位置
-			current_point = cursor().pos() - closeRelativeWidget->pos();
-		}
-		if (!enableMouseScale || (dir_type = getCursorPosition(closeRelativeWidget, current_point, MOUSE_TRACK_PADDING, true)) == 0)
-		{
-			//处理移动窗体事件
-			beforMouseGlobalPos = cursor().pos(); //记录当前鼠标全局位置 作为移动参考
-			leftMousePressed = true;
-			nowCursorShap = cursor();
-		    this->setCursor(Qt::ClosedHandCursor);
-		}
-		else
-		{
-			nowCursorShap = cursor();
-			switch(dir_type)
+			//允许缩放且关闭窗体不为NULL且不是最大化状态 检测按下点是否位于激活缩放的区域
+			if ((closeRelativeWidget->windowState() & Qt::WindowMaximized) == 0)
 			{
-			case 1:
+				QPoint close_press_pos = closeRelativeWidget->mapFromGlobal(event->globalPos());
+				int close_dir_type = getCursorPosition(closeRelativeWidget, close_press_pos, MOUSE_TRACK_PADDING, true);
+				if (close_dir_type != 0)
+				{
+					//位于可以激活缩放的区域
+					dir_type = close_dir_type;
+				}
+			}
+		}
+		if (dir_type == 0)
+		{
+			//不位于激活缩放的区域 检测移动窗体是否存在
+			if (moveRelativeWidget != NULL)
+			{
+				if ((moveRelativeWidget->windowState() & Qt::WindowMaximized) == 0)
+				{
+					//如果可移动窗体不是处于最大化才可移动
+					movePressPos = moveRelativeWidget->mapFromGlobal(event->globalPos()); //获取相对移动窗体的点击位置 后续移动保证鼠标相对移动窗体的位置始终等于这个值
+					leftMousePressed = true;  //开启移动
+					nowCursorShap = cursor(); //保存之前光标样式
+					this->setCursor(Qt::ClosedHandCursor); //抓住窗体
+				}
+				else
+				{
+					leftMousePressed = false;
+				}
+			}
+			if (closeRelativeWidget != NULL && closeRelativeWidget != moveRelativeWidget)
+			{
+				if ((closeRelativeWidget->windowState() & Qt::WindowMaximized) == 0)
+				{
+					//关闭窗体不是最大化状态时才可移动
+					closePressPos = closeRelativeWidget->mapFromGlobal(event->globalPos());
+					if (moveRelativeWidget == NULL)
+					{
+						leftMousePressed = true; //开启移动
+						nowCursorShap = cursor(); //保存之前光标样式
+						this->setCursor(Qt::ClosedHandCursor); //抓住窗体
+					}
+				}
+				else
+				{
+					leftMousePressed = false;
+				}
+			}
+		}
+		else
+		{
+			//位于激活缩放的区域 切换光标显示
+			nowCursorShap = cursor();
+			switch (dir_type)
+			{
+			case UP:
 				this->setCursor(QCursor(Qt::SizeVerCursor));
 				break;
-			case 2:
+			case DOWN:
 				this->setCursor(QCursor(Qt::SizeVerCursor));
 				break;
-			case 3:
+			case LEFT:
 				this->setCursor(QCursor(Qt::SizeHorCursor));
 				break;
-			case 4:
+			case RIGHT:
 				this->setCursor(QCursor(Qt::SizeHorCursor));
 				break;
-			case 5:
+			case LEFTTOP:
 				this->setCursor(QCursor(Qt::SizeFDiagCursor));  // 设置鼠标形状
 				break;
-			case 6:
+			case LEFTBOTTOM:
 				this->setCursor(QCursor(Qt::SizeBDiagCursor));
 				break;
-			case 7: 
+			case RIGHTBOTTOM:
 				this->setCursor(QCursor(Qt::SizeFDiagCursor));
 				break;
-			case 8:
+			case RIGHTTOP:
 				this->setCursor(QCursor(Qt::SizeBDiagCursor));
 				break;
 			default:
@@ -367,16 +386,21 @@ void CustomTitleBar::mousePressEvent(QMouseEvent *event)
 
 void CustomTitleBar::mouseMoveEvent(QMouseEvent *event)
 {
-	if (leftMousePressed&&moveRelativeWidget != NULL)
+	if (leftMousePressed && moveRelativeWidget != NULL)
 	{
-		int x_change,y_change;
-		QPoint move_to;
-		x_change = event->globalPos().x() - beforMouseGlobalPos.x();
-		y_change = event->globalPos().y() - beforMouseGlobalPos.y();
-		move_to.setX(moveRelativeWidget->x() + x_change);
-		move_to.setY(moveRelativeWidget->y() + y_change);
-		moveRelativeWidget->move(move_to);
-		beforMouseGlobalPos = event->globalPos();
+		QPoint global_move_to; //应移动到位于全局的位置
+		global_move_to = event->globalPos() - movePressPos; //全局目的位置=鼠标当前全局位置-开始移动时鼠标相对移动窗体位置  即  鼠标全局位置=全局目的位置+开始移动时鼠标相对移动窗体的位置
+		//qDebug() << global_move_to;
+		moveRelativeWidget->move(global_move_to);
+
+		if (closeRelativeWidget != NULL && closeRelativeWidget != moveRelativeWidget)
+		{
+			//关闭窗体也需要被移动
+			QPoint close_global_move_to = event->globalPos() - closePressPos;
+			closeRelativeWidget->move(close_global_move_to);
+		}
+
+		//这里后续就可以根据鼠标全局位置 判断被移动窗体是否需要自动充满屏幕、自动充满坐半屏、自动充满右半屏、自动充满上下左右1/4屏幕 以后再实现
 	}
 	QWidget::mouseMoveEvent(event);
 }

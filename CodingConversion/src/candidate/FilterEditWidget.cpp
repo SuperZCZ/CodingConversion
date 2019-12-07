@@ -10,10 +10,13 @@
  */
 
 #include <QApplication>
+#include <QStandardItemModel>
+#include <QHeaderView>
 
 #include "SignalController.h"
 #include "candidate/FilterEditWidget.h"
 #include "candidate/CandidateFilterWidget.h"
+#include "viewDelegate/FilterTableViewDelegate.h"
 
 FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(parent, true)
 {
@@ -31,7 +34,19 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	upButt = new QPushButton;
 	downButt = new QPushButton;
 
-	filterTableView = new QTableView;
+	filterTableView = new FilterEditView(this, this);
+	filterModel = new QStandardItemModel(filterTableView);
+
+	filterTableView->setModel(filterModel);
+	filterModel->setColumnCount(2);
+	filterModel->setHeaderData(0, Qt::Horizontal, trUtf8(""));
+	filterModel->setHeaderData(1, Qt::Horizontal, trUtf8("匹配正则表达式"));
+	filterTableView->verticalHeader()->hide();
+	filterTableView->setAutoScroll(true);
+	filterTableView->setColumnWidth(0, filterTableView->horizontalHeader()->height());
+	filterTableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
+	filterTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+	filterTableView->setItemDelegate(new FilterTableViewDelegate(this)); //设置委托
 
 	cancelButt = new QPushButton(trUtf8("取消"));
 	saveButt = new QPushButton(trUtf8("保存"));
@@ -69,6 +84,7 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	downButt->setObjectName("downButt");
 	cancelButt->setObjectName("normalButt");
 	saveButt->setObjectName("normalButt");
+	filterTableView->setObjectName("filterTableView");
 
 	saveButt->setFocus();
 
@@ -99,7 +115,25 @@ void FilterEditWidget::initConnect()
 
 void FilterEditWidget::setFilterList(QList<QVariant> filter_list)
 {
-	qDebug() << "***********************";
+	for (int i = 0; i < filter_list.size(); i++)
+	{
+		FilterItem filter_item = filter_list[i].value<FilterItem>();
+		QStandardItem *new_item0 = NULL, *new_item1 = NULL;
+		if (filter_item.type == 0)
+		{
+			new_item0 = new QStandardItem(trUtf8("-"));
+		}
+		else
+		{
+			new_item0 = new QStandardItem(trUtf8("+"));
+		}
+		new_item0->setEditable(false);
+
+		new_item1 = new QStandardItem(filter_item.filter_name);
+
+		filterModel->setItem(i, 0, new_item0);
+		filterModel->setItem(i, 1, new_item1);
+	}
 }
 
 void FilterEditWidget::saveFilterList()
@@ -107,7 +141,7 @@ void FilterEditWidget::saveFilterList()
 	if (parent() != NULL)
 	{
 		CandidateFilterWidget *filter_widget = static_cast<CandidateFilterWidget *>(parent());
-		QList<QVariant> filter_list; 
+		QList<QVariant> filter_list;
 		filter_widget->updateFilter(filter_list);
 	}
 }

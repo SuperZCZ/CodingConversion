@@ -35,8 +35,6 @@ class CustomTitleBar:public QWidget
     Q_OBJECT
 
 private:
-
-    QWidget *parentWidget;
 	QWidget *moveRelativeWidget;   //移动事件的关系窗体
 	QWidget *closeRelativeWidget;  //关闭 最大 最小化
 
@@ -56,7 +54,8 @@ private:
 
     bool is_show_max;
 
-	QPoint beforMouseGlobalPos;
+	QPoint movePressPos;  //移动窗体的参考点 无论怎样移动 始终保持鼠标相对于移动窗体的位置等于该点
+	QPoint closePressPos; //关闭窗体的参考点 无论怎样移动 始终保持鼠标相对于关闭窗体的位置等于该点
 	bool leftMousePressed;
 	bool changeShap;
 	bool enableMouseScale; //是否允许鼠标缩放

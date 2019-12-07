@@ -39,5 +39,8 @@
         <file>images/mini_white.png</file>
         <file>images/normal_white.png</file>
         <file>qss/FilterEditWidget.qss</file>
+        <file>images/add_sub.png</file>
+        <file>images/add.png</file>
+        <file>images/sub.png</file>
     </qresource>
 </RCC>

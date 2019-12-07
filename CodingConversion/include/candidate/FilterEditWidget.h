@@ -19,8 +19,10 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QTableView>
+#include <QStandardItemModel>
 
 #include "custom/CustomDialog.h"
+#include "view/FilterEditView.h"
 
 struct FilterItem
 {
@@ -39,7 +41,7 @@ public:
 
 	void initConnect();
 public:
-	public slots:
+public slots:
 	void setFilterList(QList<QVariant> filter_list);
 	void saveFilterList();
 protected:
@@ -48,16 +50,18 @@ private:
 	QVBoxLayout *tableView_VLay;
 	QHBoxLayout *bottom_HLay;
 
-	QPushButton* addButt;
-	QPushButton* delButt;
-	QPushButton* upButt;
-	QPushButton* downButt;
+	QPushButton *addButt;
+	QPushButton *delButt;
+	QPushButton *upButt;
+	QPushButton *downButt;
 
-	QTableView* filterTableView;
+	FilterEditView *filterTableView;
+	QStandardItemModel *filterModel;
 
-	QPushButton* cancelButt;
-	QPushButton* saveButt;
+
+	QPushButton *cancelButt;
+	QPushButton *saveButt;
 };
 
 #endif
- 
+

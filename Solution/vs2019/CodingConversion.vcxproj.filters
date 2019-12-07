@@ -127,6 +127,12 @@
     <QtMoc Include="CodingConversion\include\SignalController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewDelegate\FilterTableViewDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\FilterEditView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
@@ -195,6 +201,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CodingConversion\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

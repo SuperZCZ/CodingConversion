@@ -38,6 +38,9 @@ private:
 
 	QPushButton* filterSetButt;
 	QTabBar* filterTabBar;
+
+	void addDefaultFilter();
+
 public slots:
 	void handleTabCloseClicked(int index);
 	void settingFilter();

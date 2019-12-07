@@ -75,6 +75,8 @@
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h" />
     <ClInclude Include="CodingConversion\include\CharGlobal.h" />
+    <QtMoc Include="CodingConversion\include\view\FilterEditView.h" />
+    <QtMoc Include="CodingConversion\include\viewDelegate\FilterTableViewDelegate.h" />
     <QtMoc Include="CodingConversion\include\SignalController.h" />
     <QtMoc Include="CodingConversion\include\viewModel\CandidateTableModel.h" />
     <QtMoc Include="CodingConversion\include\viewDelegate\CandidateFileDelegate.h" />
@@ -107,8 +109,10 @@
     <ClCompile Include="CodingConversion\src\mainWindow\ProcessingWidget.cpp" />
     <ClCompile Include="CodingConversion\src\SignalController.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\CandidateFileDelegate.cpp" />
+    <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp" />
     <ClCompile Include="CodingConversion\src\viewModel\CandidateTableModel.cpp" />
     <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp" />
+    <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>

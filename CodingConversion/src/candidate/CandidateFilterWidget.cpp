@@ -35,12 +35,7 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 	filterTabBar->setUsesScrollButtons(true); //启用左右滚动按钮
 	filterTabBar->setElideMode(Qt::ElideRight);
 
-	QList<QVariant> def_filters;
-	FilterItem def_item;
-	def_item.type = 1;
-	def_item.filter_name = trUtf8("*");
-	def_filters << QVariant::fromValue<FilterItem>(def_item);
-	updateFilter(def_filters);
+	addDefaultFilter(); //添加默认过滤规则
 
 	buttHLay->setMargin(0);
 	buttHLay->setAlignment(Qt::AlignVCenter);
@@ -71,6 +66,22 @@ void CandidateFilterWidget::initConnect()
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
+}
+
+void CandidateFilterWidget::addDefaultFilter()
+{
+	QStringList filter_add_list;
+	QList<QVariant> def_filters;
+	filter_add_list << trUtf8("*.c") << trUtf8("*.cpp") << trUtf8("*.h") << trUtf8("*.hpp");
+	for (int i = 0; i < filter_add_list.size(); i++)
+	{
+		FilterItem def_item;
+		def_item.type = i % 2 == 0 ? 0 : 1;
+		def_item.filter_name = filter_add_list.at(i);
+		def_filters << QVariant::fromValue<FilterItem>(def_item);
+
+	}
+	updateFilter(def_filters);
 }
 
 void CandidateFilterWidget::handleTabCloseClicked(int index)

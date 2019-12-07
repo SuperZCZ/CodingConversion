@@ -143,8 +143,25 @@ void CustomDialog::mousePressEvent(QMouseEvent *event)
 		{
 		case Qt::LeftButton:
 			//qDebug() << "push butt left";
-			isLeftPressDown = true;
-			reSetCursor(event->pos());
+			if ((this->windowState() & Qt::WindowMaximized) == 0)
+			{
+				//窗体不是最大化状态时才可缩放
+				isLeftPressDown = true;
+				beforScaleCursor = cursor();  //记住激活缩放前的光标形状
+				dir = CustomTitleBar::getCursorPosition(this, event->pos(), Padding);  //计算鼠标位于可缩放窗体的位置 是否位于可激活缩放的边角
+				if (dir != NONE)
+				{
+					//位于可激活缩放的边角 开始缩放模式
+					scalePressGlobalPos = event->globalPos(); //记住激活缩放时鼠标的全局位置
+					scaleWidgetGeometry = this->geometry();  //记住激活缩放前的位置和大小
+
+				}
+			}
+			else
+			{
+				isLeftPressDown = false;
+				dir = NONE;
+			}
 			break;
 		default:
 			break;
@@ -155,102 +172,96 @@ void CustomDialog::mousePressEvent(QMouseEvent *event)
 
 void CustomDialog::mouseMoveEvent(QMouseEvent *event)
 {
-	if (enableMouseScale && dir != NONE)
+	if (enableMouseScale && dir != NONE && isLeftPressDown)
 	{
 		int width_inc, height_inc;
-		QPoint nowPos = event->globalPos();
-		width_inc = nowPos.x() - beforPoint.x();
-		height_inc = nowPos.y() - beforPoint.y();
+		QPoint nowPos= event->globalPos();
+
+		width_inc = nowPos.x() - scalePressGlobalPos.x();
+		height_inc = nowPos.y() - scalePressGlobalPos.y();
 		//qDebug() << "width inc " << width_inc;
 		//qDebug() << "heigt inc" << height_inc;
 
-		int reverse_x = 0, reverse_y = 0;
-		int widget_posX = pos().x(), widget_posY = pos().y();
-		int widget_width = width(), widget_height = height();
-		int moveX_flag = 0, moveY_flag = 0;
-		QPoint base_point(0, 0);
+		int reverse_x = 0, reverse_y = 0;  //缩放的系数
+		int moveX_flag = 0, moveY_flag = 0; //移动的系数
 
 		switch (dir) {
 		case LEFTTOP:
 			reverse_x = -1;
 			reverse_y = -1;
-			base_point.setX(widget_posX + widget_width);
-			base_point.setY(widget_posY + widget_height);
-			moveX_flag = -1;
-			moveY_flag = -1;
+			moveX_flag = 1;
+			moveY_flag = 1;
 			break;
 		case RIGHTTOP:
 			reverse_x = 1;
 			reverse_y = -1;
-			base_point.setY(widget_posY + widget_height);
-			base_point.setX(widget_posX);
 			moveX_flag = 0;
-			moveY_flag = -1;
+			moveY_flag = 1;
 			break;
 		case RIGHTBOTTOM:
 			reverse_x = 1;
 			reverse_y = 1;
-			base_point.setX(widget_posX);
-			base_point.setY(widget_posY);
 			moveX_flag = 0;
 			moveY_flag = 0;
 			break;
 		case LEFTBOTTOM:
 			reverse_x = -1;
 			reverse_y = 1;
-			base_point.setX(widget_posX + widget_width);
-			base_point.setY(widget_posY);
-			moveX_flag = -1;
+			moveX_flag = 1;
 			moveY_flag = 0;
 			break;
 		case UP:
 			reverse_x = 0;
 			reverse_y = -1;
-			base_point.setX(widget_posX);
-			base_point.setY(widget_posY + widget_height);
 			moveX_flag = 0;
-			moveY_flag = -1;
+			moveY_flag = 1;
 			break;
 		case RIGHT:
 			reverse_x = 1;
 			reverse_y = 0;
-			base_point.setY(widget_posY);
-			base_point.setX(widget_posX);
 			moveX_flag = 0;
 			moveY_flag = 0;
 			break;
 		case DOWN:
 			reverse_x = 0;
 			reverse_y = 1;
-			base_point.setY(widget_posY);
-			base_point.setX(widget_posX);
 			moveX_flag = 0;
 			moveY_flag = 0;
 			break;
 		case LEFT:
 			reverse_x = -1;
 			reverse_y = 0;
-			base_point.setX(widget_posX + widget_width);
-			base_point.setY(widget_posY);
-			moveX_flag = -1;
+			moveX_flag = 1;
 			moveY_flag = 0;
 			break;
 		default:
 			break;
 		}
 
-		QPoint move_to;
+		if (dir >= UP && dir <= RIGHTTOP)
+		{
+			/*QPoint move_to_globa_pos(scaleWidgetGeometry.x() + (moveX_flag * width_inc), scaleWidgetGeometry.y() + (moveY_flag * height_inc));
 
-		resize(widget_width + (reverse_x*width_inc), widget_height + (reverse_y*height_inc));
+			if (this->parentWidget() == NULL)
+			{
+				//没有父窗体直接移动到全局的指定位置
+				move(move_to_globa_pos);
+			}
+			else
+			{
+				//有父窗体则移动到相对父窗体的位置
+				move(this->parentWidget()->mapFromGlobal(move_to_globa_pos));
+			}
 
-		//改变大小后再移动  直接获取  当前窗体大小
-		move_to.setX(base_point.x() + (moveX_flag*width()));
-		move_to.setY(base_point.y() + (moveY_flag*height()));
-		move(move_to);
+			resize(scaleWidgetGeometry.width() + (reverse_x * width_inc),
+				scaleWidgetGeometry.height() + (reverse_y * height_inc));*/
+			setGeometry(
+				scaleWidgetGeometry.x() + (moveX_flag * width_inc),
+				scaleWidgetGeometry.y() + (moveY_flag * height_inc),
+				scaleWidgetGeometry.width() + (reverse_x * width_inc),
+				scaleWidgetGeometry.height() + (reverse_y * height_inc));
 
-		//设置鼠标跟随      闪动  不太好
-		//cursor().setPos(base_point.x()+(reverse_x*width()),base_point.y()+(reverse_y*height()));
-		beforPoint = nowPos;
+		}
 	}
 
 	QDialog::mouseMoveEvent(event);
@@ -265,7 +276,7 @@ void CustomDialog::mouseReleaseEvent(QMouseEvent *event)
 			isLeftPressDown = false;
 			if (dir != NONE)
 			{
-				this->setCursor(nowCursor.shape()); //松开鼠标恢复形状
+				this->setCursor(beforScaleCursor.shape()); //松开鼠标恢复形状
 			}
 		}
 	}
@@ -276,18 +287,6 @@ void CustomDialog::mouseReleaseEvent(QMouseEvent *event)
 //*********************************************privaet**********************************
 
 
-void CustomDialog::reSetCursor(const QPoint &currentPoint)
-{
-	// 获取窗体在屏幕上的位置区域，tl为topleft点，rb为rightbottom点
-	nowCursor = cursor();
-
-	dir = CustomTitleBar::getCursorPosition(this, currentPoint, Padding);  //根据鼠标在当前窗体的位置 改变鼠标形状
-
-	if (dir != NONE)
-	{
-		beforPoint = nowCursor.pos();  //记录当前光标全局位置
-	}
-}
 
 
 CustomDialog::~CustomDialog()

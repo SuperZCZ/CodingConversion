@@ -22,8 +22,8 @@ MainTopTitleWidget::MainTopTitleWidget(QWidget* relative_widget, QWidget* parent
 {
 	hAllLay = new QHBoxLayout(this);
 
-	titleLabelWidget = new CustomWidget(this, true);
-	titleBarWidget = new CustomWidget(this, true);
+	titleLabelWidget = new CustomWidget(this, false); //嵌套的自定义widget只是为了方便调用createTitleBar不要开启这些嵌套窗体的缩放！！！
+	titleBarWidget = new CustomWidget(this, false);   //嵌套的自定义widget只是为了方便调用createTitleBar不要开启这些嵌套窗体的缩放！！！
 	titleSettingWidget = new QWidget;
 
 	setting_HLay = new QHBoxLayout(titleSettingWidget);
