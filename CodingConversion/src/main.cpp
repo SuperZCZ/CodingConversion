@@ -55,5 +55,6 @@ int main(int argc, char* argv[])
 
 		qDebug() << file_infos[i].filePath() << " encoding ---------------" << char_a.codec << "  BOM " << char_a.bom_info.has_bom <<  "  " << char_a.bom_info.endian;
 	}*/
+	signalController->appStartExec();
 	return app.exec();
 }

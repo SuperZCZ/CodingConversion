@@ -7,8 +7,8 @@
 }
 
 QWidget#toolWidget{
-	min-height: 30px;
-	max-height: 30px;
+	min-height: 35px;
+	max-height: 35px;
 	/*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #D7E7FC, stop: 1.0 #A2B7ED);*/
 	background-color: transparent;
 	border-bottom: 1px solid gray;
@@ -154,15 +154,14 @@ QTabBar#filterTabBar{
 QTabBar#filterTabBar::tab {
 	max-height: 23px;
 	min-height: 23px;
-	min-width: 55px;
+	min-width: 70px;
 	max-width: 90px;
 	margin-right: 3px;
-	padding-left: 5px;
+	/*padding-left: 5px;*/
     background-color: #F0AA2C;
     border: 0px;
 	border-radius: 5px;
 	font-size: 12px;
-	font-weight: bold;
 }
 
 
@@ -171,20 +170,37 @@ QTabBar#filterTabBar::tear {
 }
 
 QTabBar#filterTabBar::scroller { /* 左+右按钮(QToolButton)所在的区域 */
-	width: 40px;
+	width: 20px;
 }
 
 QTabBar#filterTabBar QToolButton { /* the scroll buttons are tool buttons */
-	
+	max-height: 23px;
+	min-height: 23px;
+	min-width: 10px;
+	max-width: 10px;
+	background-color: white;
 	border: none;
 }
 
-QTabBar#filterTabBar QToolButton::right-arrow { /* the arrow mark in the tool buttons */
-	image: url(":/images/settings_20px.png");
+QTabBar#filterTabBar QToolButton:hover { /* the scroll buttons are tool buttons */
+	background-color: #CCD5F0;
+	border: none;
 }
 
-QTabBar#filterTabBar QToolButton::left-arrow {
-	image: url(":/images/settings_20px.png");
+QTabBar#filterTabBar QToolButton::right-arrow:enabled { /* the arrow mark in the tool buttons */
+	image: url(":/images/right_indicator_blue.png");
+}
+
+QTabBar#filterTabBar QToolButton::right-arrow:disabled { /* the arrow mark in the tool buttons */
+	image: url(":/images/right_indicator_gray.png");
+}
+
+QTabBar#filterTabBar QToolButton::left-arrow:enabled {	
+	image: url(":/images/left_indicator_blue.png");
+}
+
+QTabBar#filterTabBar QToolButton::left-arrow:disabled {	
+	image: url(":/images/left_indicator_gray.png");
 }
 
 QTabBar#filterTabBar::close-button {

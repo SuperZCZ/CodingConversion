@@ -14,9 +14,12 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QTextEdit>
+#include <QTableView>
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
+#include "processing/ProcessingToolMenu.h"
+#include "processing/ProcessingStatusWidget.h"
 
 class ProcessingWidget :public PainterWidget
 {
@@ -27,7 +30,10 @@ public:
 protected:
 private:
 	QVBoxLayout* vAllLay;
-	QTextEdit* textEdit;
+
+    ProcessingToolMenu *tool_menu;
+    QTableView *processingTableView;
+    ProcessingStatusWidget *status_widget;
 };
 
 #endif

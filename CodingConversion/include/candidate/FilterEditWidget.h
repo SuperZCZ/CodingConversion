@@ -23,6 +23,7 @@
 
 #include "custom/CustomDialog.h"
 #include "view/FilterEditView.h"
+#include "viewModel/FilterEditTableModel.h"
 
 struct FilterItem
 {
@@ -40,11 +41,28 @@ public:
 	virtual ~FilterEditWidget();
 
 	void initConnect();
-public:
 public slots:
 	void setFilterList(QList<QVariant> filter_list);
 	void saveFilterList();
-protected:
+	void resetFilterList();
+
+	void setAddButtEnabled(bool flag)
+	{
+		addButt->setEnabled(flag);
+	}
+	void setRemoveButtEnabled(bool flag)
+	{
+		delButt->setEnabled(flag);
+	}
+	void setUpButtEnabled(bool flag)
+	{
+		upButt->setEnabled(flag);
+	}
+	void setDownButtEnabled(bool flag)
+	{
+		downButt->setEnabled(flag);
+	}
+
 private:
 	QHBoxLayout *toolBox_HLay;
 	QVBoxLayout *tableView_VLay;
@@ -56,11 +74,12 @@ private:
 	QPushButton *downButt;
 
 	FilterEditView *filterTableView;
-	QStandardItemModel *filterModel;
+	FilterEditTableModel *filterModel;
 
 
 	QPushButton *cancelButt;
 	QPushButton *saveButt;
+	QPushButton *resetButt;
 };
 
 #endif

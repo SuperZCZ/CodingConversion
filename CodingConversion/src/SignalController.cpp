@@ -31,3 +31,8 @@ void SignalController::popupTooltipsMessage(QString text, QString title, ToolTip
 {
 	emit SIG_popupTooltipsMessage(text, title, msg_type);
 }
+
+void SignalController::appStartExec()
+{
+    emit initDefaultSetting();
+}

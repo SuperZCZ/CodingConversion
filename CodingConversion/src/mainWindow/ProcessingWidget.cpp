@@ -19,11 +19,19 @@ ProcessingWidget::ProcessingWidget(QWidget* parent /*= NULL*/) :PainterWidget(pa
 
 	vAllLay = new QVBoxLayout(this);
 
-	textEdit = new QTextEdit;
+	tool_menu = new ProcessingToolMenu;
+    processingTableView = new QTableView;
+    status_widget = new ProcessingStatusWidget;
 
-	textEdit->setMaximumHeight(100);
-	vAllLay->addWidget(textEdit);
+    vAllLay->setSpacing(0);
+	vAllLay->setContentsMargins(0, 0, 0, 0);
+
+	vAllLay->addWidget(tool_menu);
+    vAllLay->addWidget(processingTableView, 1);
+    vAllLay->addWidget(status_widget);
 
 	setObjectName("processingWidget");
+    processingTableView->setObjectName("processingTableView");
+
 	loadStyleSheet(":/qss/ProcessingWidget.qss");
 }

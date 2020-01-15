@@ -42,5 +42,9 @@
         <file>images/add_sub.png</file>
         <file>images/add.png</file>
         <file>images/sub.png</file>
+        <file>images/left_indicator_gray.png</file>
+        <file>images/right_indicator_gray.png</file>
+        <file>images/left_indicator_blue.png</file>
+        <file>images/right_indicator_blue.png</file>
     </qresource>
 </RCC>

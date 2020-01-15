@@ -11,10 +11,14 @@
 
 #include <QVariant>
 #include <QList>
+#include <QApplication>
+#include <QStyle>
 
 #include "SignalController.h"
 #include "candidate/CandidateFilterWidget.h"
 #include "candidate/FilterEditWidget.h"
+
+QList<QVariant> defFilterList;
 
 CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :PainterWidget(parent)
 {
@@ -33,9 +37,7 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 	filterTabBar->setMovable(true);    //允许移动
 	filterTabBar->setTabsClosable(true); //允许关闭
 	filterTabBar->setUsesScrollButtons(true); //启用左右滚动按钮
-	filterTabBar->setElideMode(Qt::ElideRight);
-
-	addDefaultFilter(); //添加默认过滤规则
+	filterTabBar->setElideMode(Qt::ElideLeft);
 
 	buttHLay->setMargin(0);
 	buttHLay->setAlignment(Qt::AlignVCenter);
@@ -54,6 +56,8 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 	filterSetButt->setObjectName("filterSetButt");
 	filterTabBar->setObjectName("filterTabBar");
 
+	initDefFilterList();
+
 	initConnect();
 }
 
@@ -62,26 +66,44 @@ void CandidateFilterWidget::initConnect()
 	ConnectInfo connectInfo[] = {
 		filterTabBar,SIGNAL(tabCloseRequested(int)), this, SLOT(handleTabCloseClicked(int)),Qt::AutoConnection,
 		filterSetButt,SIGNAL(clicked()),this,SLOT(settingFilter()),Qt::AutoConnection,
-
+		signalController,SIGNAL(initDefaultSetting()),this,SLOT(resetFilterToDefault()),Qt::AutoConnection,
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
-void CandidateFilterWidget::addDefaultFilter()
+void CandidateFilterWidget::initDefFilterList()
 {
-	QStringList filter_add_list;
-	QList<QVariant> def_filters;
-	filter_add_list << trUtf8("*.c") << trUtf8("*.cpp") << trUtf8("*.h") << trUtf8("*.hpp");
-	for (int i = 0; i < filter_add_list.size(); i++)
-	{
-		FilterItem def_item;
-		def_item.type = i % 2 == 0 ? 0 : 1;
-		def_item.filter_name = filter_add_list.at(i);
-		def_filters << QVariant::fromValue<FilterItem>(def_item);
+	defFilterList.clear();
 
+
+	FilterItem filter_array[] =
+	{
+	{1,trUtf8("*.cpp")},
+	{1,trUtf8("*.h")},
+	{1,trUtf8("*.hpp")},
+	{1,trUtf8("*.c")},
+	{1,trUtf8("*.cc")},
+	{1,trUtf8("*.cxx")},
+	{1,trUtf8("*.mak")},
+	{1,trUtf8("Makefile")},
+	{1,trUtf8("*.txt")},
+	{1,trUtf8("*.cmake")},
+	{0,trUtf8("*.exe")},
+	{0,trUtf8("*.so")},
+	{0,trUtf8("*.a")},
+	{0,trUtf8("*.lib")},
+	{0,trUtf8("*.dll")},
+	{0,trUtf8("*.obj")},
+	{0,trUtf8("*.o")}
+	};
+
+	int size_item = sizeof(filter_array) / sizeof(FilterItem);
+
+	for (int i = 0; i < size_item; i++)
+	{
+		defFilterList << QVariant::fromValue<FilterItem>(filter_array[i]);
 	}
-	updateFilter(def_filters);
 }
 
 void CandidateFilterWidget::handleTabCloseClicked(int index)
@@ -138,6 +160,13 @@ void CandidateFilterWidget::updateFilter(QList<QVariant> filter_list)
 				filterTabBar->setTabTextColor(index, QColor(255, 255, 255)); //白色代表匹配	
 			}
 			filterTabBar->setTabData(index, filter_list[i]);
+			filterTabBar->setTabToolTip(index, filter_item.filter_name);
 		}
 	}
+}
+
+void CandidateFilterWidget::resetFilterToDefault()
+{
+	QList<QVariant> def_filters = defFilterList;
+	updateFilter(def_filters);
 }

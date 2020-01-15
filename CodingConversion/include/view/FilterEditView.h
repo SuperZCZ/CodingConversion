@@ -48,7 +48,7 @@ public:
 	void initConnect();
 protected:
 	void resizeEvent(QResizeEvent *event);
-	//virtual bool eventFilter(QObject *object, QEvent *event);
+	virtual bool eventFilter(QObject *object, QEvent *event);
 	virtual void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
 public slots:
@@ -61,6 +61,9 @@ public slots:
 	void handleItemClicked(const QModelIndex &index);
 private:
 	FilterEditWidget *releativeEditWidget;
+
+	bool isSelectOneRow(const QModelIndexList &selected_index_list);
+	bool rowHaveItemSelected(int row);
 };
 
 #endif

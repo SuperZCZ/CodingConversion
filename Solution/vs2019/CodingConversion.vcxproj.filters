@@ -133,6 +133,15 @@
     <QtMoc Include="CodingConversion\include\view\FilterEditView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewModel\FilterEditTableModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\processing\ProcessingToolMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\processing\ProcessingStatusWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
@@ -207,6 +216,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewModel\FilterEditTableModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\processing\ProcessingToolMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\processing\ProcessingStatusWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

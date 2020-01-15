@@ -40,7 +40,7 @@ CandidateWidget::CandidateWidget(QWidget* parent /*= NULL*/) :PainterWidget(pare
 
 	tableModel->setColumnCount(1);
 	candidateTableView->verticalHeader()->setDefaultSectionSize(30);
-	candidateTableView->setItemDelegateForColumn(0, new CandidateFileDelegate(tableModel));
+	candidateTableView->setItemDelegateForColumn(0, new CandidateFileDelegate(candidateTableView));
 	candidateTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 	vAllLay->setSpacing(0);

@@ -219,7 +219,7 @@ void CandidateTableView::moveUpItem()
 {
 	QModelIndex item_index = selectionModel()->selectedIndexes().at(0);
 	CandidateTableModel *tableModel = static_cast<CandidateTableModel *>(model());
-	tableModel->moveRow(item_index.parent(), item_index.row(), item_index.parent(), item_index.row() - 1);  //向上移动其实师移动到上一个的前面
+	tableModel->moveRow(item_index.parent(), item_index.row(), item_index.parent(), item_index.row() - 1);  //向上移动其实是移动到上一个的前面
 	updateToolState();
 }
 
@@ -227,7 +227,7 @@ void CandidateTableView::moveDownItem()
 {
 	QModelIndex item_index = selectionModel()->selectedIndexes().at(0);
 	CandidateTableModel *tableModel = static_cast<CandidateTableModel *>(model());
-	tableModel->moveRow(item_index.parent(), item_index.row(), item_index.parent(), item_index.row() + 1); //向下移动其实师移动到下一个的后面
+	tableModel->moveRow(item_index.parent(), item_index.row(), item_index.parent(), item_index.row() + 1); //向下移动其实是移动到下一个的后面
 	updateToolState();
 }
 

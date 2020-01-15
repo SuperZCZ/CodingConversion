@@ -22,6 +22,8 @@
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
 
+extern QList<QVariant> defFilterList;
+
 class CandidateFilterWidget:public PainterWidget
 {
 	Q_OBJECT
@@ -39,13 +41,13 @@ private:
 	QPushButton* filterSetButt;
 	QTabBar* filterTabBar;
 
-	void addDefaultFilter();
-
+	void initDefFilterList();
 public slots:
 	void handleTabCloseClicked(int index);
 	void settingFilter();
 	void clearAllFilter();
 	void updateFilter(QList<QVariant> filter_list);
+	void resetFilterToDefault();
 
 };
 

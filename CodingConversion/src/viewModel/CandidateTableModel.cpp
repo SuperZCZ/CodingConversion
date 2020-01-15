@@ -23,7 +23,7 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 
 	if (destinationChild < sourceRow)
 	{
-		if (!QAbstractItemModel::beginMoveRows(sourceParent, sourceRow, sourceRow + count - 1, destinationParent, destinationChild))
+		if (!QAbstractItemModel::beginMoveRows(sourceParent, sourceRow, sourceRow + count - 1, destinationParent, destinationChild)) //调用该函数和endMoveRows以向view通知相关信号
 		{
 			return false;
 		}
@@ -36,7 +36,9 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 		}
 	}
 
+	//使用插入法进行移动 不删除或重新插入任何item实现数据的移动
 
+	//1.先缓存源数据 2.移动目的行及其之后的数据给源数据腾出空间 3.放入元数据
 	QVector<QString> itemTextBuff;
 	QVector<QIcon> itemIconBuff;
 	for (int i = 0; i < count; i++)
@@ -45,10 +47,10 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 		itemIconBuff.append(item(sourceRow + i)->icon());
 	}
 
+
 	if (destinationChild < sourceRow)
 	{
 		//向前移动 只移动item中的数据而不移动item本身
-
 
 		for (int i = sourceRow - 1; i >= destinationChild; i--)
 		{
@@ -81,7 +83,7 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 			item(i)->setText(itemTextBuff[i - (destinationChild - count + 1)]);
 			item(i)->setIcon(itemIconBuff[i - (destinationChild - count + 1)]);
 		}
-		/*for (int i = 0; i < count; i++) //这种移动方法适合移动数据而不是item
+		/*for (int i = 0; i < count; i++) //这种移动方法适合移动数据而不是item 会删除item再创建 效率没有只移动数据高
 		{
 		insertRow(destinationChild, item(sourceRow)->clone());
 
@@ -89,6 +91,6 @@ bool CandidateTableModel::moveRows(const QModelIndex& sourceParent, int sourceRo
 		}*/
 	}
 
-	QAbstractItemModel::endMoveRows();
+	QAbstractItemModel::endMoveRows();  //调用该函数以向view发送移动信号
 	return true;
 }

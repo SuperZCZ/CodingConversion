@@ -75,6 +75,9 @@
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h" />
     <ClInclude Include="CodingConversion\include\CharGlobal.h" />
+    <QtMoc Include="CodingConversion\include\processing\ProcessingStatusWidget.h" />
+    <QtMoc Include="CodingConversion\include\processing\ProcessingToolMenu.h" />
+    <QtMoc Include="CodingConversion\include\viewModel\FilterEditTableModel.h" />
     <QtMoc Include="CodingConversion\include\view\FilterEditView.h" />
     <QtMoc Include="CodingConversion\include\viewDelegate\FilterTableViewDelegate.h" />
     <QtMoc Include="CodingConversion\include\SignalController.h" />
@@ -107,10 +110,13 @@
     <ClCompile Include="CodingConversion\src\mainWindow\CandidateWidget.cpp" />
     <ClCompile Include="CodingConversion\src\mainWindow\MainWindow.cpp" />
     <ClCompile Include="CodingConversion\src\mainWindow\ProcessingWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\processing\ProcessingStatusWidget.cpp" />
+    <ClCompile Include="CodingConversion\src\processing\ProcessingToolMenu.cpp" />
     <ClCompile Include="CodingConversion\src\SignalController.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\CandidateFileDelegate.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp" />
     <ClCompile Include="CodingConversion\src\viewModel\CandidateTableModel.cpp" />
+    <ClCompile Include="CodingConversion\src\viewModel\FilterEditTableModel.cpp" />
     <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp" />
     <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp" />
   </ItemGroup>

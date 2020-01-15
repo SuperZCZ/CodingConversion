@@ -35,7 +35,7 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	downButt = new QPushButton;
 
 	filterTableView = new FilterEditView(this, this);
-	filterModel = new QStandardItemModel(filterTableView);
+	filterModel = new FilterEditTableModel(filterTableView);
 
 	filterTableView->setModel(filterModel);
 	filterModel->setColumnCount(2);
@@ -49,7 +49,8 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	filterTableView->setItemDelegate(new FilterTableViewDelegate(this)); //设置委托
 
 	cancelButt = new QPushButton(trUtf8("取消"));
-	saveButt = new QPushButton(trUtf8("保存"));
+	saveButt = new QPushButton(trUtf8("应用"));
+	resetButt = new QPushButton(trUtf8("重置"));
 
 	toolBox_HLay->setContentsMargins(10, 10, 10, 0);
 	toolBox_HLay->addStretch(1);
@@ -64,6 +65,7 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	bottom_HLay->setContentsMargins(10, 0, 10, 10);
 	bottom_HLay->setSpacing(10);
 	bottom_HLay->addStretch(1);
+	bottom_HLay->addWidget(resetButt);
 	bottom_HLay->addWidget(cancelButt);
 	bottom_HLay->addWidget(saveButt);
 
@@ -84,6 +86,7 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	downButt->setObjectName("downButt");
 	cancelButt->setObjectName("normalButt");
 	saveButt->setObjectName("normalButt");
+	resetButt->setObjectName("normalButt");
 	filterTableView->setObjectName("filterTableView");
 
 	saveButt->setFocus();
@@ -108,6 +111,11 @@ void FilterEditWidget::initConnect()
 	ConnectInfo connectInfo[] = {
 		cancelButt,SIGNAL(clicked()),this,SLOT(close()),Qt::AutoConnection,
 		saveButt,SIGNAL(clicked()),this,SLOT(saveFilterList()),Qt::AutoConnection,
+		resetButt,SIGNAL(clicked()),this,SLOT(resetFilterList()),Qt::AutoConnection,
+		addButt,SIGNAL(clicked()),filterTableView,SLOT(addNewItem()),Qt::AutoConnection,
+		delButt,SIGNAL(clicked()),filterTableView,SLOT(removeSelected()),Qt::AutoConnection,
+		upButt,SIGNAL(clicked()),filterTableView,SLOT(moveUpItem()),Qt::AutoConnection,
+		downButt,SIGNAL(clicked()),filterTableView,SLOT(moveDownItem()),Qt::AutoConnection,
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -115,6 +123,7 @@ void FilterEditWidget::initConnect()
 
 void FilterEditWidget::setFilterList(QList<QVariant> filter_list)
 {
+	filterModel->removeRows(0, filterModel->rowCount());
 	for (int i = 0; i < filter_list.size(); i++)
 	{
 		FilterItem filter_item = filter_list[i].value<FilterItem>();
@@ -142,6 +151,34 @@ void FilterEditWidget::saveFilterList()
 	{
 		CandidateFilterWidget *filter_widget = static_cast<CandidateFilterWidget *>(parent());
 		QList<QVariant> filter_list;
+
+		for (int i = 0; i < filterModel->rowCount(); i++)
+		{
+			FilterItem new_filter_item;
+			new_filter_item.filter_name = filterModel->data(filterModel->index(i, 1), Qt::EditRole).toString();
+			if (new_filter_item.filter_name.isEmpty())
+			{
+				continue;
+			}
+			else
+			{
+				QString filter_type_str = filterModel->data(filterModel->index(i, 0), Qt::EditRole).toString();
+				if (filter_type_str == trUtf8("+"))
+				{
+					new_filter_item.type = 1;
+				}
+				else
+				{
+					new_filter_item.type = 0;
+				}
+			}
+			filter_list << QVariant::fromValue<FilterItem>(new_filter_item);
+		}
 		filter_widget->updateFilter(filter_list);
 	}
+}
+
+void FilterEditWidget::resetFilterList()
+{
+	setFilterList(defFilterList);
 }

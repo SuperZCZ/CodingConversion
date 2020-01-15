@@ -85,7 +85,9 @@ private:
 //******************************************下面添加自定义信号与槽*************************************
 public slots:
 void popupTooltipsMessage(QString text, QString title = "", ToolTipsType msg_type = INFORMATION_TOOLTIPS);
+void appStartExec();
 signals:
+	void initDefaultSetting();
 	void SIG_removeSelected();
 	void SIG_moveUpItem();
 	void SIG_moveDownItem();
