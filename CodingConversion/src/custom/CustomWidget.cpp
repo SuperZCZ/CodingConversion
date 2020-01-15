@@ -66,7 +66,12 @@ void CustomWidget::autoResizeMoveToDesktopCenter(double w_percent/*=0.417*/, dou
 			w_percent = 0.44;
 			h_percent = 0.52;
 		}
-		else if ((rect.width() > 1440 && rect.width() <= 3400) && (rect.height() > 1024 && rect.height() <= 1920))
+		else if ((rect.width() > 1440 && rect.width() <= 2000) && (rect.height() > 1024 && rect.height() <= 1100))
+		{
+			w_percent = 0.45;
+			h_percent = 0.50;
+		}
+		else if ((rect.width() > 2000 && rect.width() <= 3400) && (rect.height() > 1100 && rect.height() <= 2000))
 		{
 			w_percent = 0.39;
 			h_percent = 0.43;

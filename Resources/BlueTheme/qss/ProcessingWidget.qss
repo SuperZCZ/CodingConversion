@@ -33,3 +33,126 @@ QTableView#processingTableView{
 	border-right: 0px;
 	background-color: transparent;
 }
+
+QPushButton#startPauseButt{
+	outline: none;
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 20px;
+	max-width: 20px;
+	border: none;
+	background-color: transparent;
+}
+
+QPushButton#startPauseButt:hover{
+	background-color: #D1EAFF;
+}
+
+QPushButton#startPauseButt:checked:enabled{
+	image: url(":/images/suspend_enabled.png");
+}
+
+QPushButton#startPauseButt:!checked:enabled {
+	image: url(":/images/start_enabled.png");
+}
+
+QPushButton#startPauseButt:checked:!enabled{
+	image: url(":/images/suspend_disabled.png");
+}
+
+QPushButton#startPauseButt:!checked:!enabled {
+	image: url(":/images/start_disabled.png");
+}
+
+QPushButton#stopButt{
+	outline: none;
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 20px;
+	max-width: 20px;
+	border: none;
+	background-color: transparent;
+}
+
+QPushButton#stopButt:hover{
+	background-color: #D1EAFF;
+}
+
+QPushButton#stopButt:enabled{
+	image: url(":/images/stop_enabled.png");
+}
+
+QPushButton#stopButt:!enabled{
+	image: url(":/images/stop_disabled.png");
+}
+
+QPushButton#testButt{
+	outline: none;
+	min-height: 20px;
+	max-height: 20px;
+	min-width: 20px;
+	max-width: 20px;
+	border: none;
+	background-color: transparent;
+}
+
+QPushButton#testButt:hover{
+	background-color: #D1EAFF;
+}
+
+QPushButton#testButt:enabled{
+	image: url(":/images/test_enabled.png");
+}
+
+QPushButton#testButt:!enabled{
+	image: url(":/images/test_disabled.png");
+}
+
+
+QComboBox#TypeComboBox {
+	min-height: 20px;
+	max-height: 20px;
+	border: 1px solid;
+	border-color: gray;
+	padding: 0px 0px 0px 2px;   /*必须有这句否则字体颜色无法显示 FUCK YOU ！！！ CAO CAO CAO ！！！！！！！！*/
+	font-size: 13px;
+	color: #333333;
+	background-color: rgb(255,255,255,255);
+}
+
+QComboBox#TypeComboBox::drop-down {   /*右侧向下元素的样式*/
+	margin-right: 2px;
+	border: none;
+	color: #333333;
+}
+
+QComboBox#TypeComboBox::down-arrow { /*image: url(""); 设置箭头图标*/
+	max-height: 15px;
+	min-height: 15px;
+	max-width: 15px;
+	min-width: 15px;
+	image: url(":/images/down_arrow_gray.png");
+}
+
+QComboBox#TypeComboBox QAbstractItemView {  /*下拉框的样式字体大小和粗细在这里设置*/
+	border: 1px solid;
+	border-color: #bebebe;
+	background-color: rgb(255,255,255);
+	font-size: 13px;
+	color: #333333;
+}
+
+QComboBox#TypeComboBox QAbstractItemView::item {
+	min-height: 20px;
+	max-height: 20px;
+	border: none;
+	background-color: rgb(255,255,255);
+	color: #333333;
+}
+
+QComboBox#TypeComboBox QAbstractItemView::item:hover {
+	border: none;
+	outline: none;
+	background-color: rgb(10,16,126);
+	color: white;
+}

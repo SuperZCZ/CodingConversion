@@ -14,10 +14,12 @@
 
 #include <QWidget>
 #include <QComboBox>
+#include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
 #include "CharGlobal.h"
+#include "charDetect/CharDetect.h"
 #include "custom/CustomWidget.h"
 
 class ProcessingToolMenu : public PainterWidget
@@ -26,11 +28,29 @@ class ProcessingToolMenu : public PainterWidget
 public:
     ProcessingToolMenu(QWidget *parent = NULL);
     virtual ~ProcessingToolMenu();
-protected:
+
+	void initCodeTypeList();
+	void initLineEndTypeList();
+
+public:
+	struct CodecType
+	{
+		QString displayName;
+		chardet::TextCodecInfo codecInfo;
+	};
+
+	struct LineEndType
+	{
+		QString displayName;
+		unsigned endType;
+	};
+
 private:
 
     QVBoxLayout *vAllLay;
     QHBoxLayout *top_HLay;
+	QLabel *codeLabel;
+	QLabel *lineLabel;
 
     QComboBox *codeTypeCombox;
     QComboBox *lineEndTypeCombox;

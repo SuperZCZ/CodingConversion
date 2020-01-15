@@ -9,6 +9,9 @@
  * Describe: 文档编码判断类
  */
 
+
+#ifndef _CHAR_DETECT_H_
+#define _CHAR_DETECT_H_
 #include <QObject>
 #include <QString>
 
@@ -55,3 +58,4 @@ namespace chardet
 	
 }//end uchardet ns
 
+#endif

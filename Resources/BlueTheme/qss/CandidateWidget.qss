@@ -176,8 +176,6 @@ QTabBar#filterTabBar::scroller { /* 左+右按钮(QToolButton)所在的区域 */
 QTabBar#filterTabBar QToolButton { /* the scroll buttons are tool buttons */
 	max-height: 23px;
 	min-height: 23px;
-	min-width: 10px;
-	max-width: 10px;
 	background-color: white;
 	border: none;
 }

@@ -81,6 +81,21 @@
     <QtMoc Include="CodingConversion\include\candidate\FilterEditWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\processing\ProcessingStatusWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\processing\ProcessingToolMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\FilterEditView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewDelegate\FilterTableViewDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewModel\FilterEditTableModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
@@ -151,10 +166,21 @@
     <ClCompile Include="CodingConversion\src\candidate\FilterEditWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="3rd_party\libs\uchardet.lib" />
-    <Library Include="3rd_party\libs\uchardetd.lib" />
+    <ClCompile Include="CodingConversion\src\processing\ProcessingStatusWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\processing\ProcessingToolMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewModel\FilterEditTableModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\BlueTheme\images\close_red.png" />
@@ -189,6 +215,13 @@
     <Image Include="Resources\BlueTheme\images\mini_white.png" />
     <Image Include="Resources\BlueTheme\images\normal_white.png" />
     <Image Include="Resources\BlueTheme\images\x_white.png" />
+    <Image Include="Resources\BlueTheme\images\add.png" />
+    <Image Include="Resources\BlueTheme\images\add_sub.png" />
+    <Image Include="Resources\BlueTheme\images\left_indicator_blue.png" />
+    <Image Include="Resources\BlueTheme\images\left_indicator_gray.png" />
+    <Image Include="Resources\BlueTheme\images\right_indicator_blue.png" />
+    <Image Include="Resources\BlueTheme\images\right_indicator_gray.png" />
+    <Image Include="Resources\BlueTheme\images\sub.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BlueTheme\qss\CandidateWidget.qss" />

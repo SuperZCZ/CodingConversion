@@ -46,5 +46,13 @@
         <file>images/right_indicator_gray.png</file>
         <file>images/left_indicator_blue.png</file>
         <file>images/right_indicator_blue.png</file>
+        <file>images/start_enabled.png</file>
+        <file>images/start_disabled.png</file>
+        <file>images/suspend_disabled.png</file>
+        <file>images/suspend_enabled.png</file>
+        <file>images/test_disabled.png</file>
+        <file>images/test_enabled.png</file>
+        <file>images/stop_disabled.png</file>
+        <file>images/stop_enabled.png</file>
     </qresource>
 </RCC>
