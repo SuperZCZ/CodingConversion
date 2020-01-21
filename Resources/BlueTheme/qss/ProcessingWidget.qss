@@ -24,16 +24,6 @@ QWidget#ProcessingStatusWidget{
 	border: none;
 }
 
-
-
-QTableView#processingTableView{
-	border-left: 0px;
-	border-top: 0px;
-	border-bottom: 1px solid gray;
-	border-right: 0px;
-	background-color: transparent;
-}
-
 QPushButton#startPauseButt{
 	outline: none;
 	min-height: 20px;
@@ -100,12 +90,20 @@ QPushButton#testButt:hover{
 	background-color: #D1EAFF;
 }
 
-QPushButton#testButt:enabled{
+QPushButton#testButt:checked:enabled{
 	image: url(":/images/test_enabled.png");
 }
 
-QPushButton#testButt:!enabled{
+QPushButton#testButt:!checked:enabled {
+	image: url(":/images/conversion_enabled.png");
+}
+
+QPushButton#testButt:checked:!enabled{
 	image: url(":/images/test_disabled.png");
+}
+
+QPushButton#testButt:!checked:!enabled {
+	image: url(":/images/conversion_disabled.png");
 }
 
 
@@ -155,4 +153,101 @@ QComboBox#TypeComboBox QAbstractItemView::item:hover {
 	outline: none;
 	background-color: rgb(10,16,126);
 	color: white;
+}
+
+
+
+QTableView#processingView{
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 1px solid gray;
+	border-right: 0px;
+	background-color: white;
+}
+
+QTableView#processingView::item{
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	font-size: 15px;
+	background-color: transparent;
+	color: black;
+}
+
+QTableView#processingView::item:selected{
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid #A5D6FF;
+	background-color: #CDE8FF;
+}
+
+
+QPushButton#emptyStyleButt{
+	max-height: 25px;
+	min-height: 25px;
+	max-width: 25px;
+	min-width: 25px;
+	border: none;
+	background-color: transparent;
+}
+
+QPushButton#errorStyleButt{
+	max-height: 25px;
+	min-height: 25px;
+	border: none;
+	border-radius: 5px;
+	background-color: #FF4343;
+	font-size: 12px;
+	font-weight: bold;
+	color: white;
+}
+
+QPushButton#codecInfoStyleButt{
+	max-height: 25px;
+	min-height: 25px;
+	border: none;
+	border-radius: 5px;
+	background-color: #4ABD69;
+	font-size: 12px;
+	font-weight: bold;
+	color: white;
+}
+
+QPushButton#codecInfoStyleButt:hover{
+	max-height: 25px;
+	min-height: 25px;
+	border: none;
+	border-radius: 5px;
+	background-color: #FFB900;
+	font-size: 12px;
+	font-weight: bold;
+	color: white;
+}
+
+QPushButton#convertStyleButt{
+	max-height: 25px;
+	min-height: 25px;
+	max-width: 35px;
+	min-width: 35px;
+	border: none;
+	background-color: transparent;
+	color: black;
+	image: url(":/images/conversion_right.png");
+}
+
+QPushButton#convertStyleButt:hover{
+	image: url(":/images/exchange.png");
+}
+
+QPushButton#checkStyleButt{
+	max-height: 25px;
+	min-height: 25px;
+	max-width: 35px;
+	min-width: 35px;
+	border: none;
+	background-color: transparent;
+	color: black;
+	image: url(":/images/test_enabled.png");
 }

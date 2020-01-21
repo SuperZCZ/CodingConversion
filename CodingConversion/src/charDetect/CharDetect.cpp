@@ -32,11 +32,6 @@ namespace chardet
 	{
 		TextCodecInfo res_codec;
 
-		res_codec.bom_info.has_bom = false;
-		res_codec.bom_info.endian = "";
-		res_codec.bom_info.bom_header.clear();
-		res_codec.codec = "";
-
 		FILE* fp = NULL;
 		uchardet_t handle = uchardet_new();
 		const char* charset;
@@ -46,12 +41,16 @@ namespace chardet
 		if (buffer == NULL)
 		{
 			qDebug() << "No Memary";
+			res_codec.state_type = -1;
+			res_codec.extend_info = trUtf8("探测异常");
 			return res_codec;
 		}
 
 		if (!QFile::exists(file_path))
 		{
 			qDebug() << "File " << file_path << " not exists";
+			res_codec.state_type = -1;
+			res_codec.extend_info = trUtf8("文件丢失");
 			return res_codec;
 		}
 
@@ -59,6 +58,8 @@ namespace chardet
 		if (fp == NULL)
 		{
 			qDebug() << "open " << file_path << "Error";
+			res_codec.state_type = -1;
+			res_codec.extend_info = trUtf8("打开异常");
 			return res_codec;
 		}
 
@@ -87,7 +88,13 @@ namespace chardet
 		charset = uchardet_get_charset(handle);
 		if (charset != NULL)
 		{
+			res_codec.state_type = 1;
 			res_codec.codec = trUtf8(charset);
+		}
+		else
+		{
+			res_codec.state_type = 1;
+			res_codec.codec = trUtf8("未知编码");
 		}
 
 		uchardet_delete(handle);

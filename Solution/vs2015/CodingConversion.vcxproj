@@ -18,6 +18,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
+    <QtMoc Include="CodingConversion\include\viewModel\ProcessingModel.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewDelegate\ProcessingViewDelegate.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\ProcessingView.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
     <QtMoc Include="CodingConversion\include\viewModel\FilterEditTableModel.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
@@ -58,7 +70,10 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
     </QtMoc>
-    <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h" />
+    <QtMoc Include="CodingConversion\include\charDetect\CharDetect.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
     <ClInclude Include="CodingConversion\include\CharGlobal.h" />
     <QtMoc Include="CodingConversion\include\viewModel\CandidateTableModel.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
@@ -100,8 +115,11 @@
     <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp" />
     <ClCompile Include="CodingConversion\src\viewModel\CandidateTableModel.cpp" />
     <ClCompile Include="CodingConversion\src\viewModel\FilterEditTableModel.cpp" />
+    <ClCompile Include="CodingConversion\src\viewDelegate\ProcessingViewDelegate.cpp" />
+    <ClCompile Include="CodingConversion\src\viewModel\ProcessingModel.cpp" />
     <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp" />
     <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp" />
+    <ClCompile Include="CodingConversion\src\view\ProcessingView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\BlueTheme\images\add.png" />
@@ -136,8 +154,16 @@
     <Image Include="Resources\BlueTheme\images\right_indicator_blue.png" />
     <Image Include="Resources\BlueTheme\images\right_indicator_gray.png" />
     <Image Include="Resources\BlueTheme\images\settings_20px.png" />
+    <Image Include="Resources\BlueTheme\images\start_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\start_enabled.png" />
+    <Image Include="Resources\BlueTheme\images\stop_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\stop_enabled.png" />
     <Image Include="Resources\BlueTheme\images\sub.png" />
     <Image Include="Resources\BlueTheme\images\success.png" />
+    <Image Include="Resources\BlueTheme\images\suspend_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\suspend_enabled.png" />
+    <Image Include="Resources\BlueTheme\images\test_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\test_enabled.png" />
     <Image Include="Resources\BlueTheme\images\up_arrow.png" />
     <Image Include="Resources\BlueTheme\images\up_arrow_gray.png" />
     <Image Include="Resources\BlueTheme\images\warning.png" />

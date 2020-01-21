@@ -96,11 +96,20 @@
     <QtMoc Include="CodingConversion\include\viewModel\FilterEditTableModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\view\ProcessingView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewDelegate\ProcessingViewDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\viewModel\ProcessingModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\charDetect\CharDetect.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CodingConversion\include\charDetect\CharDetect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CodingConversion\include\CharGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -181,6 +190,15 @@
     <ClCompile Include="CodingConversion\src\viewModel\FilterEditTableModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CodingConversion\src\view\ProcessingView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewDelegate\ProcessingViewDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\viewModel\ProcessingModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\BlueTheme\images\close_red.png" />
@@ -222,6 +240,14 @@
     <Image Include="Resources\BlueTheme\images\right_indicator_blue.png" />
     <Image Include="Resources\BlueTheme\images\right_indicator_gray.png" />
     <Image Include="Resources\BlueTheme\images\sub.png" />
+    <Image Include="Resources\BlueTheme\images\start_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\start_enabled.png" />
+    <Image Include="Resources\BlueTheme\images\stop_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\stop_enabled.png" />
+    <Image Include="Resources\BlueTheme\images\suspend_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\suspend_enabled.png" />
+    <Image Include="Resources\BlueTheme\images\test_disabled.png" />
+    <Image Include="Resources\BlueTheme\images\test_enabled.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BlueTheme\qss\CandidateWidget.qss" />

@@ -13,9 +13,6 @@
 
 #include "processing/ProcessingToolMenu.h"
 
-Q_DECLARE_METATYPE(ProcessingToolMenu::CodecType)
-
-
 ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidget(parent)
 {
     vAllLay = new QVBoxLayout(this);
@@ -37,9 +34,10 @@ ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidge
 	testButt = new QPushButton;
 
 	startPauseButt->setCheckable(true);
+	testButt->setCheckable(true);
 	startPauseButt->setToolTip(trUtf8("开始/暂停"));
 	stopButt->setToolTip(trUtf8("停止"));
-	testButt->setToolTip(trUtf8("仅检测"));
+	testButt->setToolTip(trUtf8("转换/检测"));
 
     top_HLay->setSpacing(10);
     top_HLay->setAlignment(Qt::AlignCenter);
@@ -79,9 +77,9 @@ void ProcessingToolMenu::initCodeTypeList()
 {
 	CodecType codec_array[] =
 	{
-		{trUtf8("UTF-8"),{trUtf8("UTF-8"),{false,trUtf8(""),QByteArray()}}},
-		{trUtf8("UTF-8-BOM"),{trUtf8("UTF-8"),{true,trUtf8(""),QByteArray("\xEF\xBB\xBF",3)}}},
-		{trUtf8("GB18030"),{trUtf8("GB18030"),{false,trUtf8(""),QByteArray()}}},
+		{trUtf8("UTF-8"),chardet::TextCodecInfo(trUtf8("UTF-8"))},
+		{trUtf8("UTF-8-BOM"),chardet::TextCodecInfo(trUtf8("UTF-8"),true,trUtf8(""),QByteArray("\xEF\xBB\xBF",3))},
+		{trUtf8("GB18030"),chardet::TextCodecInfo(trUtf8("GB18030"))},
 	};
 
 	int array_size = sizeof(codec_array) / sizeof(CodecType);

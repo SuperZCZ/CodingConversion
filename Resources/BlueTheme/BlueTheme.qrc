@@ -54,5 +54,9 @@
         <file>images/test_enabled.png</file>
         <file>images/stop_disabled.png</file>
         <file>images/stop_enabled.png</file>
+        <file>images/conversion_disabled.png</file>
+        <file>images/conversion_enabled.png</file>
+        <file>images/conversion_right.png</file>
+        <file>images/exchange.png</file>
     </qresource>
 </RCC>

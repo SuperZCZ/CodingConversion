@@ -18,6 +18,7 @@
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
+#include "view/ProcessingView.h"
 #include "processing/ProcessingToolMenu.h"
 #include "processing/ProcessingStatusWidget.h"
 
@@ -32,7 +33,7 @@ private:
 	QVBoxLayout* vAllLay;
 
     ProcessingToolMenu *tool_menu;
-    QTableView *processingTableView;
+    ProcessingView *processingView;
     ProcessingStatusWidget *status_widget;
 };
 

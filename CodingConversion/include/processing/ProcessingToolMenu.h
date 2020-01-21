@@ -61,4 +61,6 @@ private:
 };
 
 
+Q_DECLARE_METATYPE(ProcessingToolMenu::CodecType)
+
 #endif
