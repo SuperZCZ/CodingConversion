@@ -234,37 +234,63 @@ QScrollBar::sub-page:vertical{
     background:rgb(255,255,255);
 }
 
-QCheckBox#CheckBox {
+QCheckBox#CheckBox
+{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	min-height: 18px;
+	max-height: 18px;
+	min-width: 130px;
+	max-width: 130px;
 	spacing: 5px;
 }
 
-QCheckBox#CheckBox::indicator {
-	width: 12px;
-	height: 12px;
-	border: 1px solid #1F81DE;
+
+QCheckBox#CheckBox::indicator:!disabled
+{
+	height: 13px;
+	width: 13px;
+	border: 1px solid rgb(200,199,204);
+	background-color: transparent;
 }
 
-QCheckBox#CheckBox::indicator:hover {
-	background-color: rgb(167, 208, 224);
+QCheckBox#CheckBox::indicator:!disabled:hover
+{
+	border: 1px solid rgb(21,136,215);
 }
 
 
-QCheckBox#CheckBox::indicator:unchecked {
-	image: none;
+QCheckBox#CheckBox::indicator:!disabled:checked
+{
+	image: url(:/images/check-white.png);
+	background-color: rgb(21,136,215);
+	border: 1px solid rgb(21,136,215);
 }
 
-QCheckBox#CheckBox::indicator:checked {
-	image: url(":/images/check-black.png");
+QCheckBox#CheckBox::indicator:!disabled:indeterminate
+{
+	image: url(:/images/indeterminate-white.png);
+	background-color: rgb(21,136,215);
+	border: 1px solid rgb(21,136,215);
 }
 
-QCheckBox#CheckBox::indicator:unchecked:disabled  {
-	border: 1px solid gray;
-	background-color:  white;
-	image: none;
+QCheckBox#CheckBox::indicator:disabled{
+	height: 13px;
+	width: 13px;
+	border: 1px solid rgb(200,199,204);
+	background-color: rgb(217,217,217);
 }
 
-QCheckBox#CheckBox::indicator:checked:disabled  {
-	border: 1px solid gray;
-	background-color:  rgb(209, 208, 208);
-	image: url(":/images/check-white.png");
+
+QCheckBox#CheckBox::indicator:disabled:checked{
+	image: url(:/images/check-white.png);
+	background-color: rgb(217,217,217);
+	border: 1px solid rgb(200,199,204);
+}
+
+QCheckBox#CheckBox::indicator:disabled:indeterminate{
+	image: url(:/images/indeterminate-white.png);
+	background-color: rgb(217,217,217);
+	border: 1px solid rgb(200,199,204);
 }

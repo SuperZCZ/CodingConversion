@@ -58,5 +58,6 @@
         <file>images/conversion_enabled.png</file>
         <file>images/conversion_right.png</file>
         <file>images/exchange.png</file>
+        <file>images/indeterminate-white.png</file>
     </qresource>
 </RCC>
