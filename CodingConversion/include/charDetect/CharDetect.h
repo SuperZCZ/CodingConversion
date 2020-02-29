@@ -14,6 +14,7 @@
 #define _CHAR_DETECT_H_
 #include <QObject>
 #include <QString>
+#include <QMetaType> 
 
 #include "CharGlobal.h"
 #include "uchardet/uchardet.h"

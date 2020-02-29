@@ -26,6 +26,7 @@ struct ConnectInfo
 	Qt::ConnectionType connect_type;  //连接类型
 };
 
+
 enum ToolTipsType
 {
 	INFORMATION_TOOLTIPS = 0,
