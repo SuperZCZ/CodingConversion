@@ -11,6 +11,7 @@
 #include <QMetaType>
 #include <QListView>
 
+#include "SignalController.h"
 #include "processing/ProcessingToolMenu.h"
 
 ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidget(parent)
@@ -31,13 +32,13 @@ ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidge
 
     startPauseButt = new QPushButton;
     stopButt = new QPushButton;
-	testButt = new QPushButton;
+	modeButt = new QPushButton;
 
 	startPauseButt->setCheckable(true);
-	testButt->setCheckable(true);
+	modeButt->setCheckable(true);
 	startPauseButt->setToolTip(trUtf8("开始/暂停"));
 	stopButt->setToolTip(trUtf8("停止"));
-	testButt->setToolTip(trUtf8("转换/检测"));
+	modeButt->setToolTip(trUtf8("转换/检测"));
 
     top_HLay->setSpacing(10);
     top_HLay->setAlignment(Qt::AlignCenter);
@@ -50,7 +51,7 @@ ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidge
     top_HLay->addStretch(1);
     top_HLay->addWidget(startPauseButt);
     top_HLay->addWidget(stopButt);
-    top_HLay->addWidget(testButt);
+    top_HLay->addWidget(modeButt);
 
     vAllLay->setSpacing(0);
     vAllLay->setMargin(0);
@@ -62,15 +63,27 @@ ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidge
     setObjectName("ProcessingToolMenu");
 	startPauseButt->setObjectName("startPauseButt");
 	stopButt->setObjectName("stopButt");
-	testButt->setObjectName("testButt");
+	modeButt->setObjectName("modeButt");
 	
 	lineEndTypeCombox->setObjectName("TypeComboBox");
 	codeTypeCombox->setObjectName("TypeComboBox");
+	initConnect();
 }
 
 ProcessingToolMenu::~ProcessingToolMenu()
 {
 
+}
+
+void ProcessingToolMenu::initConnect()
+{
+	ConnectInfo connectInfo[] = {
+		{ startPauseButt,SIGNAL(clicked()),this,SLOT(handleStartPause()),Qt::AutoConnection },
+		{ stopButt,SIGNAL(clicked()),this,SLOT(handleStop()),Qt::AutoConnection },
+		{ modeButt,SIGNAL(clicked()),this,SLOT(handleModeSwitch()),Qt::AutoConnection },
+	};
+
+	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
 
 void ProcessingToolMenu::initCodeTypeList()
@@ -108,4 +121,20 @@ void ProcessingToolMenu::initLineEndTypeList()
 		lineEndTypeCombox->addItem(line_end_array[i].displayName);
 		lineEndTypeCombox->setItemData(i, line_end_array[i].endType);
 	}
+}
+
+
+void ProcessingToolMenu::handleStartPause()
+{
+
+}
+
+void ProcessingToolMenu::handleStop()
+{
+
+}
+
+void ProcessingToolMenu::handleModeSwitch()
+{
+
 }

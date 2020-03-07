@@ -68,11 +68,11 @@ CandidateWidget::CandidateWidget(QWidget* parent /*= NULL*/) :PainterWidget(pare
 void CandidateWidget::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		   signalController,SIGNAL(SIG_removeSelected()),candidateTableView,SLOT(removeSelected()),Qt::AutoConnection,
-		   signalController,SIGNAL(SIG_moveUpItem()),candidateTableView,SLOT(moveUpItem()),Qt::AutoConnection,
-		   signalController,SIGNAL(SIG_moveDownItem()),candidateTableView,SLOT(moveDownItem()),Qt::AutoConnection,
-		   signalController,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),candidateTableView,SLOT(addNewFilesOrDirs(QStringList)),Qt::AutoConnection,
-		   candidateTableView,SIGNAL(updateStatusBarText(QString)),stateBar,SLOT(updateStatusText(QString)),Qt::AutoConnection,
+		{ signalController,SIGNAL(SIG_removeSelected()),candidateTableView,SLOT(removeSelected()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_moveUpItem()),candidateTableView,SLOT(moveUpItem()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_moveDownItem()),candidateTableView,SLOT(moveDownItem()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),candidateTableView,SLOT(addNewFilesOrDirs(QStringList)),Qt::AutoConnection },
+		{ candidateTableView,SIGNAL(updateStatusBarText(QString)),stateBar,SLOT(updateStatusText(QString)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

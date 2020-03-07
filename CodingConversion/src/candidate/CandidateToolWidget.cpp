@@ -55,11 +55,11 @@ CandidateToolWidget::CandidateToolWidget(QWidget* parent /*= NULL*/) :PainterWid
 void CandidateToolWidget::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		addButt,SIGNAL(clicked()),this,SLOT(addFilesOrDirs()),Qt::AutoConnection,
-		delButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_removeSelected()),Qt::AutoConnection,
-		upButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_moveUpItem()),Qt::AutoConnection,
-		downButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_moveDownItem()),Qt::AutoConnection,
-		this,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),signalController,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),Qt::AutoConnection,
+		{ addButt,SIGNAL(clicked()),this,SLOT(addFilesOrDirs()),Qt::AutoConnection },
+		{ delButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_removeSelected()),Qt::AutoConnection },
+		{ upButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_moveUpItem()),Qt::AutoConnection },
+		{ downButt,SIGNAL(clicked()),signalController,SIGNAL(SIG_moveDownItem()),Qt::AutoConnection },
+		{ this,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),signalController,SIGNAL(SIG_addNewFilesOrDirs(QStringList)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

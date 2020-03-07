@@ -76,7 +76,7 @@ QPushButton#stopButt:!enabled{
 	image: url(":/images/stop_disabled.png");
 }
 
-QPushButton#testButt{
+QPushButton#modeButt{
 	outline: none;
 	min-height: 20px;
 	max-height: 20px;
@@ -86,23 +86,23 @@ QPushButton#testButt{
 	background-color: transparent;
 }
 
-QPushButton#testButt:hover{
+QPushButton#modeButt:hover{
 	background-color: #D1EAFF;
 }
 
-QPushButton#testButt:checked:enabled{
+QPushButton#modeButt:checked:enabled{
 	image: url(":/images/test_enabled.png");
 }
 
-QPushButton#testButt:!checked:enabled {
+QPushButton#modeButt:!checked:enabled {
 	image: url(":/images/conversion_enabled.png");
 }
 
-QPushButton#testButt:checked:!enabled{
+QPushButton#modeButt:checked:!enabled{
 	image: url(":/images/test_disabled.png");
 }
 
-QPushButton#testButt:!checked:!enabled {
+QPushButton#modeButt:!checked:!enabled {
 	image: url(":/images/conversion_disabled.png");
 }
 

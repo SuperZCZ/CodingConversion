@@ -37,7 +37,7 @@ FilterEditView::FilterEditView(FilterEditWidget *editWieget, QWidget *parent /*=
 void FilterEditView::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		this,SIGNAL(clicked(const QModelIndex &)),this,SLOT(handleItemClicked(const QModelIndex &)),Qt::AutoConnection,
+		{ this,SIGNAL(clicked(const QModelIndex &)),this,SLOT(handleItemClicked(const QModelIndex &)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

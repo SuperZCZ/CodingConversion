@@ -61,7 +61,7 @@ MainTopTitleWidget::MainTopTitleWidget(QWidget* relative_widget, QWidget* parent
 void MainTopTitleWidget::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		settingMenu,SIGNAL(triggered(QAction *)),this,SIGNAL(menuActionClicked(QAction *)),Qt::AutoConnection,
+		{ settingMenu,SIGNAL(triggered(QAction *)),this,SIGNAL(menuActionClicked(QAction *)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -108,8 +108,8 @@ MainWindow::~MainWindow()
 void MainWindow::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection,
-		topTitleWidget,SIGNAL(menuActionClicked(QAction *)),this,SLOT(handleAction(QAction *)),Qt::AutoConnection
+		{ signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection },
+		{ topTitleWidget,SIGNAL(menuActionClicked(QAction *)),this,SLOT(handleAction(QAction *)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

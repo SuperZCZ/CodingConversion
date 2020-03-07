@@ -32,7 +32,7 @@ CandidateTableView::CandidateTableView(CandidateToolWidget* toolWieget, QWidget*
 void CandidateTableView::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		recursionCheckBox,SIGNAL(stateChanged(int)),this,SLOT(mergeDuplicatesItem()),Qt::AutoConnection,
+		{ recursionCheckBox,SIGNAL(stateChanged(int)),this,SLOT(mergeDuplicatesItem()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

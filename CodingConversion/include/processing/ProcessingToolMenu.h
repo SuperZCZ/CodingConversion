@@ -32,6 +32,7 @@ public:
 	void initCodeTypeList();
 	void initLineEndTypeList();
 
+	void initConnect();
 public:
 	struct CodecType
 	{
@@ -55,9 +56,14 @@ private:
     QComboBox *codeTypeCombox;
     QComboBox *lineEndTypeCombox;
 
-    QPushButton *startPauseButt;  //开始暂停
+    QPushButton *startPauseButt;  //开始/暂停
     QPushButton *stopButt;        //停止按钮
-    QPushButton *testButt;        //检测按钮
+    QPushButton *modeButt;        //检测/转换按钮
+
+public slots:
+void handleStartPause();
+void handleStop();
+void handleModeSwitch();
 };
 
 

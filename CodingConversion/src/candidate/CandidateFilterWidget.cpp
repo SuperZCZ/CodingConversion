@@ -64,9 +64,9 @@ CandidateFilterWidget::CandidateFilterWidget(QWidget* parent /*= NULL*/) :Painte
 void CandidateFilterWidget::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		filterTabBar,SIGNAL(tabCloseRequested(int)), this, SLOT(handleTabCloseClicked(int)),Qt::AutoConnection,
-		filterSetButt,SIGNAL(clicked()),this,SLOT(settingFilter()),Qt::AutoConnection,
-		signalController,SIGNAL(initDefaultSetting()),this,SLOT(resetFilterToDefault()),Qt::AutoConnection,
+		{ filterTabBar,SIGNAL(tabCloseRequested(int)), this, SLOT(handleTabCloseClicked(int)),Qt::AutoConnection },
+		{ filterSetButt,SIGNAL(clicked()),this,SLOT(settingFilter()),Qt::AutoConnection },
+		{ signalController,SIGNAL(initDefaultSetting()),this,SLOT(resetFilterToDefault()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

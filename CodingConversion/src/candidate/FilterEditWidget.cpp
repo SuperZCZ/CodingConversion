@@ -109,13 +109,13 @@ FilterEditWidget::~FilterEditWidget()
 void FilterEditWidget::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		cancelButt,SIGNAL(clicked()),this,SLOT(close()),Qt::AutoConnection,
-		saveButt,SIGNAL(clicked()),this,SLOT(saveFilterList()),Qt::AutoConnection,
-		resetButt,SIGNAL(clicked()),this,SLOT(resetFilterList()),Qt::AutoConnection,
-		addButt,SIGNAL(clicked()),filterTableView,SLOT(addNewItem()),Qt::AutoConnection,
-		delButt,SIGNAL(clicked()),filterTableView,SLOT(removeSelected()),Qt::AutoConnection,
-		upButt,SIGNAL(clicked()),filterTableView,SLOT(moveUpItem()),Qt::AutoConnection,
-		downButt,SIGNAL(clicked()),filterTableView,SLOT(moveDownItem()),Qt::AutoConnection,
+		{ cancelButt,SIGNAL(clicked()),this,SLOT(close()),Qt::AutoConnection },
+		{ saveButt,SIGNAL(clicked()),this,SLOT(saveFilterList()),Qt::AutoConnection },
+		{ resetButt,SIGNAL(clicked()),this,SLOT(resetFilterList()),Qt::AutoConnection },
+		{ addButt,SIGNAL(clicked()),filterTableView,SLOT(addNewItem()),Qt::AutoConnection },
+		{ delButt,SIGNAL(clicked()),filterTableView,SLOT(removeSelected()),Qt::AutoConnection },
+		{ upButt,SIGNAL(clicked()),filterTableView,SLOT(moveUpItem()),Qt::AutoConnection },
+		{ downButt,SIGNAL(clicked()),filterTableView,SLOT(moveDownItem()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
