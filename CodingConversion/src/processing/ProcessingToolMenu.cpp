@@ -12,10 +12,13 @@
 #include <QListView>
 
 #include "SignalController.h"
+#include "custom/CustomMessageBox.h"
 #include "processing/ProcessingToolMenu.h"
 
 ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidget(parent)
 {
+	have_conversion = false;
+
     vAllLay = new QVBoxLayout(this);
     top_HLay = new QHBoxLayout;
 
@@ -78,9 +81,12 @@ ProcessingToolMenu::~ProcessingToolMenu()
 void ProcessingToolMenu::initConnect()
 {
 	ConnectInfo connectInfo[] = {
-		{ startPauseButt,SIGNAL(clicked()),this,SLOT(handleStartPause()),Qt::AutoConnection },
-		{ stopButt,SIGNAL(clicked()),this,SLOT(handleStop()),Qt::AutoConnection },
-		{ modeButt,SIGNAL(clicked()),this,SLOT(handleModeSwitch()),Qt::AutoConnection },
+		{ startPauseButt,SIGNAL(clicked()),this,SLOT(handleStartPauseClicked()),Qt::AutoConnection },
+		{ stopButt,SIGNAL(clicked()),this,SLOT(handleStopClicked()),Qt::AutoConnection },
+		{ modeButt,SIGNAL(clicked()),this,SLOT(handleModeSwitchClicked()),Qt::AutoConnection },
+		{ this,SIGNAL(SIG_startConversion()),signalController,SIGNAL(SIG_startConversion()),Qt::AutoConnection },
+		{ this,SIGNAL(SIG_stopConversion()),signalController,SIGNAL(SIG_stopConversion()),Qt::AutoConnection },
+		{ this,SIGNAL(SIG_pauseConversion()),signalController,SIGNAL(SIG_pauseConversion()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -124,17 +130,68 @@ void ProcessingToolMenu::initLineEndTypeList()
 }
 
 
-void ProcessingToolMenu::handleStartPause()
+void ProcessingToolMenu::handleStartPauseClicked()
 {
-
+	startPauseButt->setDisabled(true);
+	if (startPauseButt->isChecked())
+	{
+		emit SIG_startConversion();
+	}
+	else
+	{
+		emit SIG_pauseConversion();
+	}
 }
 
-void ProcessingToolMenu::handleStop()
+void ProcessingToolMenu::handleStopClicked()
 {
+	if (have_conversion)
+	{
+		stopButt->setDisabled(true);
+		startPauseButt->setDisabled(true);
 
+		QString info_str = trUtf8("转换");
+		if (modeButt->isChecked())
+		{
+			info_str = trUtf8("检测");
+		}
+
+		QMessageBox::StandardButton res_butt = CustomMessageBox::question(this, trUtf8("终止任务"), trUtf8("确认终止当前%1任务？").arg(info_str), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		if (res_butt == QMessageBox::Yes)
+		{
+			emit SIG_stopConversion();
+		}
+	}
+	emit SIG_stopConversion();
 }
 
-void ProcessingToolMenu::handleModeSwitch()
+void ProcessingToolMenu::handleModeSwitchClicked()
 {
+	if (have_conversion)
+	{
+		CustomMessageBox::warning(this, trUtf8("警告"), trUtf8("请先终止当前任务后再切换模式!"), QMessageBox::Yes, QMessageBox::Yes);
+	}
+	else
+	{
+		modeButt->setChecked(!modeButt->isChecked());
+	}
+}
 
+void ProcessingToolMenu::handleConversionStart()
+{
+	startPauseButt->setEnabled(true);
+	startPauseButt->setChecked(true);
+}
+
+void ProcessingToolMenu::handleConversionPause()
+{
+	startPauseButt->setEnabled(true);
+	startPauseButt->setChecked(false);
+}
+
+void ProcessingToolMenu::handleConversionStop()
+{
+	startPauseButt->setEnabled(true);
+	startPauseButt->setChecked(false);
+	stopButt->setEnabled(true);
 }

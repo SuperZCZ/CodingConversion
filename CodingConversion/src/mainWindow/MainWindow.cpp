@@ -14,6 +14,7 @@
 #include "custom/CustomTooltipsMessage.h"
 #include "custom/CustomMessageBox.h"
 #include "dialog/AboutDialog.h"
+#include "workThread/ProcessThread.h"
 
 const static int LEFT_WIDGET_STRETCH = 327;
 const static int RIGHT_WIDGET_STRETCH = 740;
@@ -75,6 +76,8 @@ MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
 	qss.close();
 	setStyleSheet(qssStr);
 
+	test_worker = NULL;
+
 	topTitleWidget = new MainTopTitleWidget(this);
 
 	mainWinodwSplitter = new QSplitter(Qt::Horizontal);
@@ -110,6 +113,8 @@ void MainWindow::initConnect()
 	ConnectInfo connectInfo[] = {
 		{ signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection },
 		{ topTitleWidget,SIGNAL(menuActionClicked(QAction *)),this,SLOT(handleAction(QAction *)),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_startConversion()),this,SLOT(handleStartConversion()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_stopConversion()),this,SLOT(handleStopConversion()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -163,6 +168,30 @@ void MainWindow::handleAction(QAction *action)
 	{
 		AboutDialog *about_dialog = new AboutDialog;
 		about_dialog->show();
+	}
+}
+
+void MainWindow::handleStartConversion()
+{
+	qDebug() << "----------------------------";
+	test_worker = new TestWorker;
+	connect(this, SIGNAL(testSignal()), test_worker, SLOT(testFun()));
+	emit testSignal();
+}
+
+void MainWindow::handlePauseConversion()
+{
+
+}
+
+void MainWindow::handleStopConversion()
+{
+	qDebug() << "+++++++++++++++++++++++++++++";
+	if (test_worker != NULL)
+	{
+		test_worker->destroy();
+		//delete test_worker;
+		test_worker = NULL;
 	}
 }
 

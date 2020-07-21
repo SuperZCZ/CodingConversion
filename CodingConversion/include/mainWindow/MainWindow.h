@@ -25,6 +25,7 @@
 #include "ProcessingWidget.h"
 #include "custom/CustomWidget.h"
 #include "custom/CustomTitleBar.h"
+#include "workThread/ProcessThread.h"
 
 
 class MainTopTitleWidget:public PainterWidget
@@ -45,7 +46,6 @@ private:
 	QHBoxLayout* setting_HLay;
 	QPushButton* settingButt;
 	QMenu* settingMenu;
-
 signals:
 	void menuActionClicked(QAction *action);
 };
@@ -64,6 +64,12 @@ protected:
 public slots:
 void popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type);
 void handleAction(QAction *action);
+void handleStartConversion();
+void handlePauseConversion();
+void handleStopConversion();
+
+signals:
+	void testSignal();
 private:
 	MainTopTitleWidget* topTitleWidget;
 
@@ -72,6 +78,7 @@ private:
 	CandidateWidget* candidateWidget;
 	ProcessingWidget* processingWidget;
 
+	TestWorker *test_worker;
 };
 
 
