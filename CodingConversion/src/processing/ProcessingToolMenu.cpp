@@ -87,6 +87,9 @@ void ProcessingToolMenu::initConnect()
 		{ this,SIGNAL(SIG_startConversion()),signalController,SIGNAL(SIG_startConversion()),Qt::AutoConnection },
 		{ this,SIGNAL(SIG_stopConversion()),signalController,SIGNAL(SIG_stopConversion()),Qt::AutoConnection },
 		{ this,SIGNAL(SIG_pauseConversion()),signalController,SIGNAL(SIG_pauseConversion()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_conversionStarted()),this,SLOT(handleConversionStart()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_conversionStoped()),this,SLOT(handleConversionStop()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_conversionPaused()),this,SLOT(handleConversionPause()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));

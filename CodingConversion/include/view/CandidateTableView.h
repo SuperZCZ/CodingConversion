@@ -15,6 +15,8 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <QCheckBox>
+#include <QString>
+#include <QList>
 
 #include "CharGlobal.h"
 #include "candidate/CandidateToolWidget.h"

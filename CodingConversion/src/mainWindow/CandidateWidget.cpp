@@ -77,3 +77,15 @@ void CandidateWidget::initConnect()
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
 }
+
+QVector<QString> CandidateWidget::getCandidateList()
+{
+	int row_count = tableModel->rowCount();
+	QVector<QString> path_list;
+	for (int i = 0; i < row_count; i++)
+	{
+		QString path_str = tableModel->item(i)->data(Qt::DisplayRole).toString();
+		path_list.push_back(path_str);
+	}
+	return path_list;
+}

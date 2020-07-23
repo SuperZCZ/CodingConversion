@@ -8,6 +8,7 @@
 #include "SignalController.h"
 #include "mainWindow/MainWindow.h"
 #include "charDetect/CharDetect.h"
+#include "setting/GlobalSetting.h"
 
 SignalController* signalController = NULL;
 
@@ -29,6 +30,8 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	GlobalSetting::createInstance();   //创建全局设置对象(线程安全)
+
 	signalController = SignalController::createSignalController(); //创建信号控制器
 	if (signalController == NULL)
 	{
@@ -40,6 +43,7 @@ int main(int argc, char* argv[])
 	MainWindow mainWindow;
 	mainWindow.show();
 	mainWindow.autoResizeMoveToDesktopCenter();
+
 	//mainWindow.autoResizeMoveToDesktopCenter(0.49f,0.56f);
 
 	/*chardet::TextCodecInfo char_a;

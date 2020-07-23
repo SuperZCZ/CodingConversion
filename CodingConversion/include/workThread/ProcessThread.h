@@ -13,24 +13,46 @@
 #define _PROCESS_THREAD_H_
 
 #include <QThread>
+#include <QMutex>
+#include <QWaitCondition>
+#include <QString>
+#include <QVector>
+#include <QQueue>
 
-class TestWorker :public QObject
+class DetectThread:public QThread
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    TestWorker();
-    virtual ~TestWorker();
+	DetectThread(QObject *parent = NULL);
+	virtual ~DetectThread();
+
+	void initConnect();
+
+	void setCandidateQueue(const QVector<QString> &path_list);
+protected:
+	virtual void run();
+
+private:
+	volatile bool is_stop;
+	volatile bool is_pause;
+	QQueue<QString> candidateQueue;
+
+	QMutex condMutex;
+	QWaitCondition runWaitCond;
+
+	QStringList getDirSubFileList(const QString &dir_path, bool recursion_dir);
+
+public slots:
+void stop(); //终止检测线程
+void pause(); //暂停检测线程
+void start(); //开始/继续
 
 signals:
-    void SIG_destroy();
-public slots:
-    void testFun();
-    void destroy();
-private slots:
-    void SLOT_destroy();
-private:
-    QThread *workThread;
+	void paused();  //暂停
+	void startover(); //开始
+	void stoped();  //停止
 };
+
 
 /*class ProcessThread :public QThread
 {

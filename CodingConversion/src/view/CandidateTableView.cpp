@@ -14,6 +14,7 @@
 #include "SignalController.h"
 #include "mainWindow/CandidateWidget.h"
 #include "view/CandidateTableView.h"
+#include "setting/GlobalSetting.h"
 
 CandidateTableView::CandidateTableView(CandidateToolWidget* toolWieget, QWidget* parent /*= NULL*/) :QTableView(parent)
 {
@@ -25,7 +26,7 @@ CandidateTableView::CandidateTableView(CandidateToolWidget* toolWieget, QWidget*
 
 	recursionCheckBox->setObjectName("CheckBox");
 	recursionCheckBox->setChecked(true);
-
+	globalSetting->setValue("recursionDir", true);
 	initConnect();
 }
 
@@ -233,54 +234,88 @@ void CandidateTableView::moveDownItem()
 
 void CandidateTableView::mergeDuplicatesItem()
 {
-	if (recursionCheckBox->isChecked())
+	//递归不递归都要去重 不递归去除直接子项(除目录) 递归去除子项和孙子项
+	bool recursion_dir = recursionCheckBox->isChecked();
+	if (recursion_dir)
 	{
 		//进行遍历去重操作
-		int index_child = 0, index_parent = 0;
-		bool should_delete = false, happened_merge = false;
+		globalSetting->setValue("recursionDir", true);
+	}
+	else
+	{
+		globalSetting->setValue("recursionDir", false);
+	}
 
-		for (index_child = 0; index_child < model()->rowCount(); index_child++)
+	int index_child = 0, index_parent = 0;
+	bool should_delete = false, happened_merge = false;
+
+	for (index_child = 0; index_child < model()->rowCount(); index_child++)
+	{
+		should_delete = false;
+		QString child_path = model()->index(index_child, 0).data(Qt::DisplayRole).toString();
+		if (!QFileInfo::exists(child_path))
 		{
-			should_delete = false;
-			QString child_path = model()->index(index_child, 0).data(Qt::DisplayRole).toString();
-			if (!QFileInfo::exists(child_path))
+			//不存在的文件也应该从列表中清除
+			should_delete = true;
+		}
+		else
+		{
+			for (index_parent = 0; index_parent < model()->rowCount(); index_parent++)
 			{
-				//不存在的文件也应该从列表中清除
-				should_delete = true;
-			}
-			else
-			{
-				for (index_parent = 0; index_parent < model()->rowCount(); index_parent++)
+				if (index_parent == index_child)
 				{
-					if (index_parent == index_child)
+					continue;
+				}
+				else
+				{
+					QString parent_path = model()->index(index_parent, 0).data(Qt::DisplayRole).toString();
+					if (isSubpathOf(child_path, parent_path))
 					{
-						continue;
-					}
-					else
-					{
-						QString parent_path = model()->index(index_parent, 0).data(Qt::DisplayRole).toString();
-						if (isSubpathOf(child_path, parent_path))
+						//如果存在其父项则子项也应被清除
+						should_delete = true;
+						if (!recursion_dir)
 						{
-							//如果存在其父项则子项也应被清除
-							should_delete = true;
+							//不递归则只需去除直接子项(目录除外)
+							//如果是子项是目录或者非直接子项则不用清除
+							QFileInfo child_info(child_path);
+							QFileInfo parent_info(parent_path);
+							if (child_info.absolutePath() != parent_info.absolutePath())
+							{
+								//两者路径不一样不是同一文件或同一目录
+								if (child_info.isDir())
+								{
+									should_delete = false;
+								}
+								else
+								{
+									if (parent_info.isDir() && (child_info.absoluteDir().absolutePath() != parent_info.absoluteFilePath()))
+									{
+										//子项文件不为父目录的直接子项 不用清除子项
+										should_delete = false;
+									}
+								}
+							}
+						}
+						if (should_delete)
+						{
 							break;
 						}
 					}
 				}
 			}
+		}
 
-			if (should_delete)
-			{
-				model()->removeRow(index_child);
-				happened_merge = true;
-				index_child--;
-			}
-		}
-		if (happened_merge)
+		if (should_delete)
 		{
-			//弹出气泡提示窗
-			signalController->popupTooltipsMessage(trUtf8("已合并重复项!"), trUtf8(""), INFORMATION_TOOLTIPS);
+			model()->removeRow(index_child);
+			happened_merge = true;
+			index_child--;
 		}
+	}
+	if (happened_merge)
+	{
+		//弹出气泡提示窗
+		signalController->popupTooltipsMessage(trUtf8("已合并重复项!"), trUtf8(""), INFORMATION_TOOLTIPS);
 	}
 }
 

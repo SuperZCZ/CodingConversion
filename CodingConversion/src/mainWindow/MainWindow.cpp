@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
 	qss.close();
 	setStyleSheet(qssStr);
 
-	test_worker = NULL;
+	detectThread = NULL;
 
 	topTitleWidget = new MainTopTitleWidget(this);
 
@@ -114,7 +114,6 @@ void MainWindow::initConnect()
 		{ signalController,SIGNAL(SIG_popupTooltipsMessage(QString, QString,ToolTipsType)),this,SLOT(popupToolTipsMessage(QString, QString,ToolTipsType)),Qt::AutoConnection },
 		{ topTitleWidget,SIGNAL(menuActionClicked(QAction *)),this,SLOT(handleAction(QAction *)),Qt::AutoConnection },
 		{ signalController,SIGNAL(SIG_startConversion()),this,SLOT(handleStartConversion()),Qt::AutoConnection },
-		{ signalController,SIGNAL(SIG_stopConversion()),this,SLOT(handleStopConversion()),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -171,27 +170,19 @@ void MainWindow::handleAction(QAction *action)
 	}
 }
 
+void MainWindow::handleDetectThreadFinished()
+{
+	detectThread = NULL;
+}
+
 void MainWindow::handleStartConversion()
 {
-	qDebug() << "----------------------------";
-	test_worker = new TestWorker;
-	connect(this, SIGNAL(testSignal()), test_worker, SLOT(testFun()));
-	emit testSignal();
-}
-
-void MainWindow::handlePauseConversion()
-{
-
-}
-
-void MainWindow::handleStopConversion()
-{
-	qDebug() << "+++++++++++++++++++++++++++++";
-	if (test_worker != NULL)
+	if (detectThread == NULL)
 	{
-		test_worker->destroy();
-		//delete test_worker;
-		test_worker = NULL;
+		detectThread = new DetectThread;
+		connect(detectThread, SIGNAL(finished()), this, SLOT(handleDetectThreadFinished()));
+		detectThread->setCandidateQueue(candidateWidget->getCandidateList());
+		detectThread->start();
 	}
 }
 

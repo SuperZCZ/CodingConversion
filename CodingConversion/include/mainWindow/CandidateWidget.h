@@ -18,6 +18,8 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <QCheckBox>
+#include <QString>
+#include <QVector>
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
@@ -36,6 +38,8 @@ public:
 	virtual ~CandidateWidget() {}
 
 	void initConnect();
+
+	QVector<QString> getCandidateList();
 protected:
 	
 private:

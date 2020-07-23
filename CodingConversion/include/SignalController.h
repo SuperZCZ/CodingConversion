@@ -94,9 +94,11 @@ signals:
 	void SIG_moveDownItem();
 	void SIG_addNewFilesOrDirs(QStringList fileList);
 	void SIG_popupTooltipsMessage(QString text, QString title, ToolTipsType msg_type);
+
 	void SIG_startConversion();
 	void SIG_pauseConversion();
 	void SIG_stopConversion();
+
 	void SIG_conversionStarted();
 	void SIG_conversionStoped();
 	void SIG_conversionPaused();

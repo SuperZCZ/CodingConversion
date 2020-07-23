@@ -64,9 +64,8 @@ protected:
 public slots:
 void popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type);
 void handleAction(QAction *action);
+void handleDetectThreadFinished();
 void handleStartConversion();
-void handlePauseConversion();
-void handleStopConversion();
 
 signals:
 	void testSignal();
@@ -78,7 +77,7 @@ private:
 	CandidateWidget* candidateWidget;
 	ProcessingWidget* processingWidget;
 
-	TestWorker *test_worker;
+	DetectThread *detectThread;
 };
 
 

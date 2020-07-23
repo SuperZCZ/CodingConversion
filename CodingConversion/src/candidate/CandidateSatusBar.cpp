@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * FileName: CandidateSatusBar.cpp
  *
  * Author:   ZhangChaoZe
@@ -6,7 +6,7 @@
  * Code:     UTF-8 without BOM
  * LineFeed: Unix LF
  *
- * Describe: ¾ÍÐ÷ÁÐ±í×´Ì¬À¸
+ * Describe: å°±ç»ªåˆ—è¡¨çŠ¶æ€æ 
  */
 
 #include "candidate/CandidateSatusBar.h"
@@ -16,7 +16,7 @@ CandidateSatusBar::CandidateSatusBar(QWidget *parent /*= NULL*/) :PainterWidget(
 	vAllLay = new QVBoxLayout(this);
 	info_HLay = new QHBoxLayout;
 
-	info_label = new QLabel(trUtf8("Î´Ìí¼ÓÈÎºÎÎÄ¼þ"));
+	info_label = new QLabel(trUtf8("æœªæ·»åŠ ä»»ä½•æ–‡ä»¶"));
 
 	info_label->adjustSize();
 	info_label->setAlignment(Qt::AlignRight);
