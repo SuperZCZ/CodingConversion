@@ -6,7 +6,7 @@
  * Code:     UTF-8 without BOM
  * LineFeed: Unix LF
  *
- * Describe: 处理状态栏
+ * Describe: 检测状态栏
  */
 
 #ifndef _PROCESSING_STATUS_WIDGET_H_

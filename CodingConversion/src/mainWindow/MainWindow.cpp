@@ -14,7 +14,7 @@
 #include "custom/CustomTooltipsMessage.h"
 #include "custom/CustomMessageBox.h"
 #include "dialog/AboutDialog.h"
-#include "workThread/ProcessThread.h"
+#include "workThread/ConversionProcess.h"
 
 const static int LEFT_WIDGET_STRETCH = 327;
 const static int RIGHT_WIDGET_STRETCH = 740;
@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
 	qss.close();
 	setStyleSheet(qssStr);
 
-	detectThread = NULL;
+	conversionThread = NULL;
 
 	topTitleWidget = new MainTopTitleWidget(this);
 
@@ -170,19 +170,19 @@ void MainWindow::handleAction(QAction *action)
 	}
 }
 
-void MainWindow::handleDetectThreadFinished()
+void MainWindow::handleConversionThreadFinished()
 {
-	detectThread = NULL;
+	conversionThread = NULL;
 }
 
 void MainWindow::handleStartConversion()
 {
-	if (detectThread == NULL)
+	if (conversionThread == NULL)
 	{
-		detectThread = new DetectThread;
-		connect(detectThread, SIGNAL(finished()), this, SLOT(handleDetectThreadFinished()));
-		detectThread->setCandidateQueue(candidateWidget->getCandidateList());
-		detectThread->start();
+		conversionThread = new ConversionThread;
+		connect(conversionThread, SIGNAL(finished()), this, SLOT(handleConversionThreadFinished()));
+		conversionThread->setCandidateQueue(candidateWidget->getCandidateList());
+		conversionThread->start();
 	}
 }
 

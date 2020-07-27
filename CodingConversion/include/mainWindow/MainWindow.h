@@ -25,7 +25,7 @@
 #include "ProcessingWidget.h"
 #include "custom/CustomWidget.h"
 #include "custom/CustomTitleBar.h"
-#include "workThread/ProcessThread.h"
+#include "workThread/ConversionProcess.h"
 
 
 class MainTopTitleWidget:public PainterWidget
@@ -64,7 +64,7 @@ protected:
 public slots:
 void popupToolTipsMessage(QString text, QString title, ToolTipsType msg_type);
 void handleAction(QAction *action);
-void handleDetectThreadFinished();
+void handleConversionThreadFinished();
 void handleStartConversion();
 
 signals:
@@ -77,7 +77,7 @@ private:
 	CandidateWidget* candidateWidget;
 	ProcessingWidget* processingWidget;
 
-	DetectThread *detectThread;
+	ConversionThread *conversionThread;
 };
 
 

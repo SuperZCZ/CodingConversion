@@ -37,6 +37,9 @@ FilterEditWidget::FilterEditWidget(QWidget *parent /*= NULL*/) :CustomDialog(par
 	filterTableView = new FilterEditView(this, this);
 	filterModel = new FilterEditTableModel(filterTableView);
 
+	upButt->setDisabled(true);
+	downButt->setDisabled(true);
+
 	filterTableView->setModel(filterModel);
 	filterModel->setColumnCount(2);
 	filterModel->setHeaderData(0, Qt::Horizontal, trUtf8(""));
