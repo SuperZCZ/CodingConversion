@@ -59,5 +59,8 @@
         <file>images/conversion_right.png</file>
         <file>images/exchange.png</file>
         <file>images/indeterminate-white.png</file>
+        <file>images/status_conversion.png</file>
+        <file>images/status_pause.png</file>
+        <file>images/status_stop.png</file>
     </qresource>
 </RCC>

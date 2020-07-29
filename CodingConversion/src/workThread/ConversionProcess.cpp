@@ -181,7 +181,7 @@ void ConversionThread::run()
 			}
 
 			//检测current_path 一定是非目录项
-			//QThread::sleep(2);
+			QThread::sleep(1);
 			qDebug() << "-------------------------file:" << current_path;
 			ConversionProcessQueue::ProcessTask process_task;
 			process_task.taskType = ConversionProcessQueue::PROCESS_FILE_PATH_TYPE;

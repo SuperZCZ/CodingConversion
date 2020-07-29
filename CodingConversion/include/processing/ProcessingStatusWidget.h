@@ -11,9 +11,14 @@
 
 #ifndef _PROCESSING_STATUS_WIDGET_H_
 #define _PROCESSING_STATUS_WIDGET_H_
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QProgressBar>
 
 #include "CharGlobal.h"
 #include "custom/CustomWidget.h"
+
+
 
 class ProcessingStatusWidget :public PainterWidget
 {
@@ -21,8 +26,24 @@ class ProcessingStatusWidget :public PainterWidget
 public:
     ProcessingStatusWidget(QWidget *parent = NULL);
     virtual ~ProcessingStatusWidget();
-protected:
+
+	void initConnect();
+public slots:
+void handleStartConversion();
+void handleStopConversion();
+void handlePauseConversion();
+
+void handleConversionStoped();
+void handleConversionPaused();
+void handleConversionStarted();
+
 private:
+	QHBoxLayout *hAllLay;
+
+	QProgressBar *progressBar;
+	QLabel *progressInfoLabel;
+	QLabel *statusInfoLabel;
+	QLabel *statusIconLabel;
 };
 
 #endif

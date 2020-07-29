@@ -14,11 +14,10 @@
 #include "SignalController.h"
 #include "custom/CustomMessageBox.h"
 #include "processing/ProcessingToolMenu.h"
+#include "setting/GlobalSetting.h"
 
 ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidget(parent)
 {
-	have_conversion = false;
-
     vAllLay = new QVBoxLayout(this);
     top_HLay = new QHBoxLayout;
 
@@ -70,6 +69,9 @@ ProcessingToolMenu::ProcessingToolMenu(QWidget *parent /*= NULL*/) :PainterWidge
 	
 	lineEndTypeCombox->setObjectName("TypeComboBox");
 	codeTypeCombox->setObjectName("TypeComboBox");
+
+	globalSetting->setValue("isDetectMode", modeButt->isChecked());
+
 	initConnect();
 }
 
@@ -148,7 +150,9 @@ void ProcessingToolMenu::handleStartPauseClicked()
 
 void ProcessingToolMenu::handleStopClicked()
 {
-	if (have_conversion)
+	QVariant hasConversionTask;
+	globalSetting->getValue("hasConversionTask", hasConversionTask);
+	if (hasConversionTask.toBool())
 	{
 		stopButt->setDisabled(true);
 		startPauseButt->setDisabled(true);
@@ -165,19 +169,18 @@ void ProcessingToolMenu::handleStopClicked()
 			emit SIG_stopConversion();
 		}
 	}
-	emit SIG_stopConversion();
 }
 
 void ProcessingToolMenu::handleModeSwitchClicked()
 {
-	if (have_conversion)
-	{
-		CustomMessageBox::warning(this, trUtf8("警告"), trUtf8("请先终止当前任务后再切换模式!"), QMessageBox::Yes, QMessageBox::Yes);
-	}
-	else
+	QVariant hasConversionTask;
+	globalSetting->getValue("hasConversionTask", hasConversionTask);
+	if (hasConversionTask.toBool())
 	{
 		modeButt->setChecked(!modeButt->isChecked());
+		CustomMessageBox::warning(this, trUtf8("警告"), trUtf8("请先终止当前任务后再切换模式!"), QMessageBox::Yes, QMessageBox::Yes);
 	}
+	globalSetting->setValue("isDetectMode", modeButt->isChecked());
 }
 
 void ProcessingToolMenu::handleConversionStart()

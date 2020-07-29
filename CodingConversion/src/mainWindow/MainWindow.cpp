@@ -15,6 +15,7 @@
 #include "custom/CustomMessageBox.h"
 #include "dialog/AboutDialog.h"
 #include "workThread/ConversionProcess.h"
+#include "setting/GlobalSetting.h"
 
 const static int LEFT_WIDGET_STRETCH = 327;
 const static int RIGHT_WIDGET_STRETCH = 740;
@@ -100,6 +101,8 @@ MainWindow::MainWindow(QWidget* parent /*= NULL*/) :CustomWidget(parent, true)
 	topTitleWidget->setObjectName("topTitleWidget");
 	mainWinodwSplitter->setObjectName("mainWinodwSplitter");
 
+	globalSetting->setValue("hasConversionTask", false);
+
 	initConnect();
 }
 
@@ -173,12 +176,14 @@ void MainWindow::handleAction(QAction *action)
 void MainWindow::handleConversionThreadFinished()
 {
 	conversionThread = NULL;
+	globalSetting->setValue("hasConversionTask", false);
 }
 
 void MainWindow::handleStartConversion()
 {
 	if (conversionThread == NULL)
 	{
+		globalSetting->setValue("hasConversionTask", true);
 		conversionThread = new ConversionThread;
 		connect(conversionThread, SIGNAL(finished()), this, SLOT(handleConversionThreadFinished()));
 		conversionThread->setCandidateQueue(candidateWidget->getCandidateList());

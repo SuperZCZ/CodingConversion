@@ -251,3 +251,45 @@ QPushButton#checkStyleButt{
 	color: black;
 	image: url(":/images/test_enabled.png");
 }
+
+QProgressBar#ProgressBar{
+	border: 1px solid #bebebe;
+}
+
+
+QLabel#ProgressInfoLabel{
+	max-width: 80px;
+	min-width: 80px;
+	border: 0px;
+	color: gray;
+}
+
+
+QLabel#StatusInfoLabel{
+	max-width: 70px;
+	min-width: 70px;
+	border: 0px;
+	color: gray;
+}
+
+QLabel#StatusIconLabel{
+	max-width: 17px;
+	min-width: 17px;
+	max-height: 17px;
+	min-height: 17px;
+	border: 0px;
+	image: url(":/images/status_stop.png");
+}
+
+QLabel#StatusIconLabel[status="stoped"]{
+	image: url(":/images/status_stop.png");
+}
+
+QLabel#StatusIconLabel[status="paused"]{
+	image: url(":/images/status_pause.png");
+}
+
+QLabel#StatusIconLabel[status="conversion"]{
+	image: url(":/images/status_conversion.png");
+}
+

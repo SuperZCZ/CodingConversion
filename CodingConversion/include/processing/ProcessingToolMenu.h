@@ -59,8 +59,6 @@ private:
     QPushButton *startPauseButt;  //开始/暂停
     QPushButton *stopButt;        //停止按钮
     QPushButton *modeButt;        //检测/转换按钮
-
-    bool have_conversion; //是否有转换任务 暂停也算有任务
 signals:
     void SIG_startConversion();
     void SIG_pauseConversion();
