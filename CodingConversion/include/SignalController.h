@@ -102,6 +102,9 @@ signals:
 	void SIG_conversionStarted();
 	void SIG_conversionStoped();
 	void SIG_conversionPaused();
+
+	void SIG_updateConversionProgress(int current_count);
+	void SIG_updateConversionCount(int count);
 public slots:
 
 

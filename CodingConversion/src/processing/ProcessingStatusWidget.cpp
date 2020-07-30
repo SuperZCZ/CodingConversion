@@ -46,7 +46,6 @@ ProcessingStatusWidget::ProcessingStatusWidget(QWidget *parent /*= NULL*/) :Pain
 	hAllLay->addWidget(statusIconLabel);
 
 	progressBar->setRange(0, 100);
-	progressBar->setValue(50);
 	progressBar->setTextVisible(false);
 	progressBar->hide();
 
@@ -73,6 +72,8 @@ void ProcessingStatusWidget::initConnect()
 		{ signalController,SIGNAL(SIG_startConversion()),this,SLOT(handleStartConversion()),Qt::AutoConnection },
 		{ signalController,SIGNAL(SIG_stopConversion()),this,SLOT(handleStopConversion()),Qt::AutoConnection },
 		{ signalController,SIGNAL(SIG_pauseConversion()),this,SLOT(handlePauseConversion()),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_updateConversionProgress(int)),this,SLOT(updateConversionProgress(int)),Qt::AutoConnection },
+		{ signalController,SIGNAL(SIG_updateConversionCount(int)),this,SLOT(updateConversionCount(int)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -123,4 +124,21 @@ void ProcessingStatusWidget::handleConversionStarted()
 	statusIconLabel->setStyle(QApplication::style());
 	progressBar->show();
 	progressInfoLabel->show();
+}
+
+void ProcessingStatusWidget::updateConversionProgress(int current_count)
+{
+	progressBar->setValue(current_count);
+	progressInfoLabel->setText(trUtf8("%1/%2").arg(progressBar->value()).arg(progressBar->maximum()));
+}
+
+void ProcessingStatusWidget::updateConversionCount(int count)
+{
+	progressBar->setRange(0, count);
+	int current_count = progressBar->value();
+	if (current_count < 0)
+	{
+		current_count = 0;
+	}
+	progressInfoLabel->setText(trUtf8("%1/%2").arg(current_count).arg(progressBar->maximum()));
 }

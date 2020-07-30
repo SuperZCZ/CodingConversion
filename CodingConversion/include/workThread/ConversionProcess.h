@@ -85,21 +85,28 @@ private:
 
 	ConversionProcessQueue *conversionProcessQueue;
 
+	int current_count;
+	QMutex currentCountMutex;
+
 	QStringList getDirSubFileList(const QString &dir_path, bool recursion_dir);
 
 	QVector<ConversionProcessThread *> processingThreads;
 
 	void createProcessingThread(int thread_num);
 	void destroyProcessingThread();
+	int calculateProcessingCount(const QVector<QString> &path_list, bool recursion_dir); //计算总应处理的数量
 public slots:
 void stop(); //终止检测线程
 void pause(); //暂停检测线程
 void start(); //开始/继续
+void increaseCurrentCount();
 
 signals:
 	void paused();  //暂停
 	void startover(); //开始
 	void stoped();  //停止
+	void updateConversionCount(int sum_count);
+	void updateConversionProgress(int current_count);
 };
 
 
@@ -114,7 +121,7 @@ class ConversionProcessThread :public QThread
 {
 	Q_OBJECT
 public:
-	ConversionProcessThread(ConversionProcessQueue *processQueue, QObject *parent = NULL);
+	ConversionProcessThread(ConversionProcessQueue *processQueue, ConversionThread *_conversionThread, QObject *parent = NULL);
 	virtual ~ConversionProcessThread();
 
 	void initConnect();
@@ -122,6 +129,7 @@ protected:
     virtual void run();
 private:
 	ConversionProcessQueue *conversionProcessQueue;
+	ConversionThread *conversionThread;
 };
 
 #endif

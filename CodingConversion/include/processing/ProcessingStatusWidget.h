@@ -37,6 +37,9 @@ void handleConversionStoped();
 void handleConversionPaused();
 void handleConversionStarted();
 
+void updateConversionProgress(int current_count);
+void updateConversionCount(int count);
+
 private:
 	QHBoxLayout *hAllLay;
 

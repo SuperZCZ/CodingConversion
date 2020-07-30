@@ -25,6 +25,7 @@ ConversionThread::ConversionThread(QObject *parent /*= NULL*/) :QThread(parent)
 {
 	is_stop = true;
 	is_pause = true;
+	current_count = 0;
 
 	conversionProcessQueue = NULL;
 
@@ -50,6 +51,8 @@ void ConversionThread::initConnect()
 		{ signalController,SIGNAL(SIG_startConversion()),this,SLOT(start()),Qt::AutoConnection },
 		{ signalController,SIGNAL(SIG_stopConversion()),this,SLOT(stop()),Qt::AutoConnection },
 		{ signalController,SIGNAL(SIG_pauseConversion()),this,SLOT(pause()),Qt::AutoConnection },
+		{ this,SIGNAL(updateConversionCount(int)),signalController,SIGNAL(SIG_updateConversionCount(int)),Qt::AutoConnection },
+		{ this,SIGNAL(updateConversionProgress(int)),signalController,SIGNAL(SIG_updateConversionProgress(int)),Qt::AutoConnection },
 	};
 
 	SignalController::setConnectInfo(connectInfo, sizeof(connectInfo) / sizeof(ConnectInfo));
@@ -104,12 +107,31 @@ void ConversionThread::start()
 	condMutex.unlock();
 }
 
+void ConversionThread::increaseCurrentCount()
+{
+	currentCountMutex.lock();
+	++current_count;
+	currentCountMutex.unlock();
+	emit updateConversionProgress(current_count);
+}
+
 void ConversionThread::run()
 {
 	emit startover();
 	qDebug() << "Detected thread start";
 	QStringList current_candidate; //当前待检测文件列表(用list是为了方便对目录下的所有文件进行检测)
 	volatile bool befor_paused = is_pause;
+
+	QVariant val;
+	globalSetting->getValue("recursionDir", val);
+	bool recursion_dir = val.toBool();
+
+	int count_sum = 0;
+	condMutex.lock();
+	count_sum = calculateProcessingCount(candidateQueue.toVector(), recursion_dir); //获取统计计数
+	condMutex.unlock();
+	emit updateConversionCount(count_sum); //更新状态栏
+
 	while (!is_stop)
 	{
 		condMutex.lock();
@@ -168,9 +190,6 @@ void ConversionThread::run()
 			{
 				//目录的话递归获取目录下所有文件和子孙目录下的所有文件列表
 				//不递归的话只回去目录下所有文件不包括子目录和孙子目录
-				QVariant val;
-				globalSetting->getValue("recursionDir", val);
-				bool recursion_dir = val.toBool();
 				QStringList sub_file_path_list = getDirSubFileList(current_path, recursion_dir);
 				if (!sub_file_path_list.isEmpty())
 				{
@@ -233,7 +252,7 @@ void ConversionThread::createProcessingThread(int thread_num)
 {
 	for (int i = 0; i < thread_num; i++)
 	{
-		ConversionProcessThread *processThread = new ConversionProcessThread(conversionProcessQueue);
+		ConversionProcessThread *processThread = new ConversionProcessThread(conversionProcessQueue, this);
 		if (processThread != NULL)
 		{
 			processingThreads.push_back(processThread);
@@ -251,11 +270,42 @@ void ConversionThread::destroyProcessingThread()
 	processingThreads.clear();
 }
 
+int ConversionThread::calculateProcessingCount(const QVector<QString> &path_list, bool recursion_dir)
+{
+	int sum_count = 0;
+	for (int i = 0; i < path_list.size(); i++)
+	{
+		//当前检测文件的路径  可能是一个用户指定的文件也可能是待检测目录中的一个文件
+		QString current_path = path_list[i];
+
+		QFileInfo file_info(current_path);
+		if (!file_info.exists())
+		{
+			continue;
+		}
+
+		if (file_info.isDir())
+		{
+			//目录的话递归获取目录下所有文件和子孙目录下的所有文件列表
+			//不递归的话只回去目录下所有文件不包括子目录和孙子目录
+			QStringList sub_file_path_list = getDirSubFileList(current_path, recursion_dir);
+			sum_count += sub_file_path_list.size();
+		}
+		else
+		{
+			sum_count++;
+		}
+	}
+	qDebug() << "/*/*****************************" << sum_count;
+	return sum_count;
+}
+
 //---------------------------------------转换处理线程-------------------------------------
 
-ConversionProcessThread::ConversionProcessThread(ConversionProcessQueue *processQueue, QObject *parent) :QThread(parent)
+ConversionProcessThread::ConversionProcessThread(ConversionProcessQueue *processQueue, ConversionThread *_conversionThread, QObject *parent) :QThread(parent)
 {
 	conversionProcessQueue = processQueue;
+	conversionThread = _conversionThread;
 
 	initConnect();
 }
@@ -288,6 +338,7 @@ void ConversionProcessThread::run()
 		{
 			QString file_path = process_task.taskData.toString();
 			qDebug() << "Processing --------- " << file_path << " ---- " << this->currentThreadId();
+			conversionThread->increaseCurrentCount();
 			QThread::sleep(2);
 		}
 		else if (process_task.taskType == ConversionProcessQueue::PROCESS_STOP_THREEAD_TYPE)
