@@ -108,6 +108,12 @@
     <QtMoc Include="CodingConversion\include\charDetect\CharDetect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CodingConversion\include\setting\GlobalSetting.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\workThread\ConversionProcess.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodingConversion\include\CharGlobal.h">
@@ -197,6 +203,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CodingConversion\src\viewModel\ProcessingModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\setting\GlobalSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CodingConversion\src\workThread\ConversionProcess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -18,6 +18,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd_party\include\uchardet\uchardet.h" />
+    <QtMoc Include="CodingConversion\include\setting\GlobalSetting.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CodingConversion\include\workThread\ConversionProcess.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
+    </QtMoc>
     <QtMoc Include="CodingConversion\include\viewModel\ProcessingModel.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(ProjectDir)3rd_party\include;$(ProjectDir)CodingConversion\include</IncludePath>
@@ -110,6 +118,7 @@
     <ClCompile Include="CodingConversion\src\mainWindow\ProcessingWidget.cpp" />
     <ClCompile Include="CodingConversion\src\processing\ProcessingStatusWidget.cpp" />
     <ClCompile Include="CodingConversion\src\processing\ProcessingToolMenu.cpp" />
+    <ClCompile Include="CodingConversion\src\setting\GlobalSetting.cpp" />
     <ClCompile Include="CodingConversion\src\SignalController.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\CandidateFileDelegate.cpp" />
     <ClCompile Include="CodingConversion\src\viewDelegate\FilterTableViewDelegate.cpp" />
@@ -120,6 +129,7 @@
     <ClCompile Include="CodingConversion\src\view\CandidateTableView.cpp" />
     <ClCompile Include="CodingConversion\src\view\FilterEditView.cpp" />
     <ClCompile Include="CodingConversion\src\view\ProcessingView.cpp" />
+    <ClCompile Include="CodingConversion\src\workThread\ConversionProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\BlueTheme\images\add.png" />
